@@ -1,0 +1,73 @@
+---
+layout: base.njk
+title: 34F Design Construction Project | Toronto | Ridgeway Services
+description: Explore Ridgeway's 34F Design project, showcasing our approach to thoughtful commercial design and creating functional, distinctive spaces.
+projectSlug: 34f-design
+projectCategory: Commercial Design
+projectLocation: Toronto, ON
+---
+<section class="project-hero" style="background-image: url('/images/projects/headers/{{ projectSlug }}-header.jpg');">
+  <div class="container-interior project-hero-inner">
+    <a class="project-back-link" href="/projects/">
+      <span class="project-back-arrow">←</span>
+      <span>Back to projects</span>
+    </a>
+    <div class="project-hero-copy" data-reveal>
+      <h1>34F Design</h1>
+      <div class="project-hero-meta">
+        <span>{{ projectCategory }}</span>
+        <span class="divider">•</span>
+        <span>{{ projectLocation }}</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="gallery-section section section-full" data-reveal-group>
+  <div class="container-interior" data-reveal>
+    <div class="gallery-grid">
+      {% for filename in galleries[projectSlug] %}
+        <button class="gallery-item" data-index="{{ loop.index0 }}">
+          <img src="/images/projects/{{ projectSlug }}/{{ filename }}" alt="{{ projectSlug }} gallery photo {{ loop.index }}" />
+        </button>
+      {% endfor %}
+    </div>
+  </div>
+
+  <!-- Lightbox overlay -->
+  <div class="lightbox" id="lightbox">
+    <button class="lightbox-close" aria-label="Close gallery">&times;</button>
+    <button class="lightbox-arrow lightbox-prev" aria-label="Previous photo">&#8249;</button>
+    <img class="lightbox-image" src="" alt="" />
+    <button class="lightbox-arrow lightbox-next" aria-label="Next photo">&#8250;</button>
+    <div class="lightbox-counter"></div>
+  </div>
+</section>
+
+<section class="section white-bg project-description" data-reveal-group>
+  <div class="container container-interior" data-reveal>
+    <p>
+      Provide a detailed description of the 34F Design project, including the scope of work, challenges faced, 
+      and any unique aspects of the project. Highlight the results achieved and any client testimonials if available.
+    </p>
+  </div>
+</section>
+
+<section class="section white-bg project-nav-section" data-reveal-group>
+  <div class="container-interior" data-reveal>
+    <div class="project-nav">
+      {% if projectNav[projectSlug].prev %}
+        <a class="project-nav-link project-nav-prev" href="{{ projectNav[projectSlug].prev.url }}">
+          <span class="project-nav-label">Previous</span>
+          {# <strong>{{ projectNav[projectSlug].prev.title }}</strong> #}
+        </a>
+      {% endif %}
+      {% if projectNav[projectSlug].next %}
+        <a class="project-nav-link project-nav-next" href="{{ projectNav[projectSlug].next.url }}">
+          <span class="project-nav-label">Next</span>
+          {# <strong>{{ projectNav[projectSlug].next.title }}</strong> #}
+        </a>
+      {% endif %}
+    </div>
+  </div>
+</section>

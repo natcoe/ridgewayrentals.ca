@@ -1,0 +1,16 @@
+{
+  "name": "Ridgeway Services & Construction Ltd.",
+  "phone": "905-315-8887",
+  "url": "https://ridgewayservices.ca",
+  "foundingYear": "1993",
+  "email": "info@ridgewayservices.ca",
+  "address": {
+      "street": "837 Hwy 6 N",
+      "city": "Hamilton",
+      "region": "ON",
+      "postalCode": "L8P 1A1",
+      "country": "CA"
+  },
+  "addressLink": "https://www.google.com/maps/dir/?api=1&destination=837+Hwy+6+N,+Hamilton,+ON",
+  "businessHours": "Monday - Friday: 8:00 AM - 5:00 PM"
+}

@@ -1,0 +1,27 @@
+{
+  "name": "ridgewayservices.ca",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "dev": "eleventy --serve",
+    "build": "eleventy"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/natcoe/ridgewayservices.ca.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/natcoe/ridgewayservices.ca/issues"
+  },
+  "homepage": "https://github.com/natcoe/ridgewayservices.ca#readme",
+  "dependencies": {
+    "@11ty/eleventy": "^3.1.6",
+    "@11ty/eleventy-plugin-rss": "^3.0.0",
+    "sharp": "^0.35.3"
+  }
+}

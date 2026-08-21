@@ -1,0 +1,55 @@
+<footer class="site-footer">
+  <div class="container footer-top">
+    <div class="footer-brand">
+      <img src="/images/ridgeway-logo-white.svg" alt="{{ site.name }}" class="footer-logo" />
+      <p class="footer-tagline">Integrity | Teamwork | Tradition</p>
+    </div>
+
+    <div class="footer-col">
+      <h4>Quick Links</h4>
+      <ul>
+        <li><a href="/services/">Services</a></li>
+        <li><a href="/projects/">Our projects</a></li>
+        <li><a href="/about/">About Us</a></li>
+        <li><a href="/contact/">Contact</a></li>
+      </ul>
+    </div>
+
+    <div class="footer-col">
+      <h4>Services</h4>
+      <ul>
+        <li><a href="/services/design-build/">Design-Build</a></li>
+        <li><a href="/services/construction/">Commercial Construction</a></li>
+        <li><a href="/services/project-management/">Project Management</a></li>
+        <li><a href="/services/maintenance/">Maintenance & Repairs</a></li>
+      </ul>
+    </div>
+
+    <div class="footer-col">
+      <h4>Our Companies</h4>
+      <ul>
+        <li><a href="/">Ridgeway Services</a></li>
+        <li><a href="#">Ramrock</a></li>
+        <li><a href="#">Heritage</a></li>
+        <li><a href="#">Painting</a></li>
+        <li><a href="#">Bins</a></li>
+        <li><a href="#">Storage</a></li>
+      </ul>
+    </div>
+
+    <div class="footer-col">
+      <h4>Contact</h4>
+      <ul class="footer-contact">
+        <li><a href="tel:{{ site.phone | replace('-', '') }}">{{ site.phone }}</a></li>
+        <li><a href="mailto:{{ site.email }}">{{ site.email }}</a></li>
+        <li><a href="{{ site.addressLink }}" target="_blank" rel="noopener noreferrer">{{ site.address.street }}, {{ site.address.city }}, {{ site.address.region }} {{ site.address.postalCode }}</a></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="footer-divider"></div>
+
+  <div class="container footer-bottom">
+    <p>&copy; {% year %} | {{ site.name }} All Rights Reserved.</p>
+  </div>
+</footer>

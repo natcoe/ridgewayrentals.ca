@@ -1,0 +1,68 @@
+[
+  {
+    "name": "Toronto Film School",
+    "src": "/images/partner-logos/logo_TFS.png",
+    "alt": "Toronto Film School logo",
+    "url": "/projects/education/toronto-film-school/"
+  },
+  {
+    "name": "Yorkville University",
+    "src": "/images/partner-logos/logo_yorkville-university.png",
+    "alt": "Yorkville University logo",
+    "url": "/projects/education/yorkville-university/"
+  },
+  {
+    "name": "CEFA",
+    "src": "/images/partner-logos/logo_cefa.png",
+    "alt": "CEFA logo",
+    "url": "/projects/daycare/CEFA/"
+  },
+  {
+    "name": "Taco Bell",
+    "src": "/images/partner-logos/logo_tacobell.png",
+    "alt": "Taco Bell logo",
+    "url": "/projects/restaurants/taco-bell/"
+  },
+  {
+    "name": "Well Grounded Real Estate",
+    "src": "/images/partner-logos/logo_well-grounded.png",
+    "alt": "Well Grounded Real Estate logo",
+    "url": "/projects/commercial-plaza/well-grounded-developments/"
+  },
+  {
+    "name": "McCor Management",
+    "src": "/images/partner-logos/logo_mccor.png",
+    "alt": "McCor Management logo",
+    "url": "/projects/commercial-plaza/mccor-management-inc/"
+  },
+  {
+    "name": "KFC",
+    "src": "/images/partner-logos/logo_kfc.png",
+    "alt": "KFC logo",
+    "url": "/projects/restaurants/kfc/"
+  },
+  {
+    "name": "Burger King",
+    "src": "/images/partner-logos/logo_burger-king.png",
+    "alt": "Burger King logo",
+    "url": "/projects/restaurants/burger-king/"
+  },
+  {
+    "name": "SCM",
+    "src": "/images/partner-logos/logo_scm.png",
+    "alt": "SCM logo",
+    "url": "/projects/offices/SCM-insurance/"
+  },
+  {
+    "name": "34F Design",
+    "src": "/images/partner-logos/logo_34FDesign.png",
+    "alt": "34F Design logo",
+    "url": "/projects/commercial-design/34f-design/"
+  },
+  {
+    "name": "Gulf Pacific",
+    "src": "/images/partner-logos/logo_gulf-pacific.png",
+    "alt": "Gulf Pacific logo",
+    "url": "/projects/offices/gulf-pacific/"
+  }
+]

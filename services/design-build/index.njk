@@ -1,0 +1,90 @@
+---
+layout: base.njk
+title: Design-Build Construction Services | GTA & Southern Ontario
+description: Turnkey design-build for retail, restaurant & office projects. One team from concept to completion — serving the GTA, Hamilton & Southern Ontario for 30+ years.
+serviceType: Design-Build
+breadcrumbs:
+  - name: Services
+    url: /services/
+  - name: Design-Build
+    url: /services/design-build/
+featuredProjectSlugs:
+  - 34f-design
+  - well-grounded-developments
+  - taco-bell
+---
+<section class="section section-full section-hero-header interior" data-reveal-group>
+  <div class="container-interior" data-reveal>
+    <h1>Design-Build</h1>
+    <p>
+      Our design-build services combine planning, design, permits, and construction into 
+      one streamlined experience, making your project simpler, faster, and more 
+      cost-effective from start to finish.
+    </p>
+  </div>
+</section>
+
+<section class="section section-full" data-reveal-group>
+  <div class="container-interior" data-reveal>
+    <div class="eyebrow primary">Our Services</div>
+    <h2>Design-Build Made Simple</h2>
+    <p class="sub-desc">One team, one process, from concept to completion.</p>
+    <p>
+      With our Design-Build services, we handle everything—from the initial concept and 
+      design to permits and construction—under one roof. This means fewer delays, better 
+      communication, and one team working together to bring your vision to life. 
+      It's a faster, more efficient way to build, and it helps keep your project on time 
+      and on budget.
+    </p>
+    <p>
+      Our design-build approach streamlines the entire construction process by combining 
+      architectural design, engineering, and construction services into a single, unified 
+      team. This eliminates the traditional back-and-forth between separate entities and 
+      creates a seamless flow from concept to completion.
+    </p>
+  </div>
+
+  <div class="container-interior whats-included" data-reveal>
+    <h3 data-reveal>What's included</h3>
+    <ul class="inluded-list">
+      <li data-reveal>Preventive maintenance programs</li>
+      <li data-reveal>Emergency repairs and quick response</li>
+      <li data-reveal>Painting and touch-ups</li>
+      <li data-reveal>Drywall repairs</li>
+      <li data-reveal>Flooring repairs and replacement</li>
+      <li data-reveal>Tenant turnover preparation</li>
+      <li data-reveal>General building upkeep</li>
+    </ul>
+  </div>
+</section>
+
+<section class="section section-full projects-page box-shadow" data-reveal-group>
+  <div class="container-interior" data-reveal>
+    <h2 class="sub">Related Design-Build Projects</h2>
+
+    <div class="related-projects-carousel">
+      <div class="slideshow-viewport">
+        <div class="project-grid slideshow-track">
+          {% for project in projects %}
+            {% if project.slug in featuredProjectSlugs %}
+              <a href="{{ project.url }}" class="project-tile" data-category="{{ project.category | lower | replace(' ', '-') }}">
+                <div class="project-tile-placeholder" aria-hidden="true"></div>
+                {% if project.image %}
+                  <img src="{{ project.image }}" alt="{{ project.title }}" />
+                {% endif %}
+                <div class="project-tile-overlay">
+                  <span class="project-category">{{ project.category }}</span>
+                  <h3>{{ project.title }}</h3>
+                  <span class="view-project">View Project <span class="arrow">→</span></span>
+                </div>
+              </a>
+            {% endif %}
+          {% endfor %}
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+{% include "contact.njk" %}
+{% include "faq.njk" %}

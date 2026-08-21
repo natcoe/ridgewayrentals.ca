@@ -1,0 +1,27 @@
+[
+  {
+    "title": "Design-Build",
+    "slug": "design-build",
+    "url": "/services/design-build/",
+    "description": "Our design-build services combine planning, design, permits, and construction into one streamlined experience, making your project simpler, faster, and more cost-effective from start to finish."
+  },
+  {
+    "title": "Construction",
+    "slug": "construction",
+    "url": "/services/construction/",
+    "description": "We specialize in commercial construction projects of all sizes, from retail stores, restaurants, and office fit-ups to ground-up commercial buildings. With an experienced team and a commitment to quality craftsmanship, we deliver functional, high-quality spaces built to meet your needs."
+  },
+  {
+    "title": "Maintenance",
+    "slug": "maintenance",
+    "url": "/services/maintenance/",
+    "description": "Our commercial maintenance services help keep your property safe, functional, and looking its best. From routine upkeep and repairs to emergency fixes, our responsive team delivers reliable, high-quality workmanship to minimize downtime and keep your business running smoothly."
+  },
+  {
+    "title": "Project Management",
+    "slug": "project-management",
+    "url": "/services/project-management/",
+    "description": "Our project management services keep every stage of your project organized, on schedule, and on budget. From planning and coordination to scheduling, budgeting, and inspections, we manage the details so you can focus on the bigger picture—all with clear communication and a single point of contact."
+  }
+  
+]

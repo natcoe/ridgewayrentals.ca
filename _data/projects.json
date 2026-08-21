@@ -1,0 +1,182 @@
+[
+  {
+    "title": "Toronto Film School",
+    "slug": "toronto-film-school",
+    "type": "Commercial",
+    "category": "Education",
+    "url": "/projects/education/toronto-film-school/",
+    "image": "/images/card/projects/toronto-film-school/toronto-film-school.webp",
+    "description": "",
+    "featured": false
+  },
+  {
+    "title": "Yorkville University",
+    "slug": "yorkville-university",
+    "type": "Commercial",
+    "category": "Education",
+    "url": "/projects/education/yorkville-university/",
+    "image": "/images/card/projects/yorkville-university/yorkville-university.webp",
+    "description": "",
+    "featured": false
+  },
+  {
+    "title": "CEFA",
+    "slug": "cefa",
+    "type": "Commercial",
+    "category": "Daycare",
+    "url": "/projects/daycare/CEFA/",
+    "image": "/images/card/projects/cefa/cefa-daycare.webp",
+    "description": "",
+    "featured": false
+  },
+  {
+    "title": "Taco Bell",
+    "slug": "taco-bell",
+    "type": "Commercial",
+    "category": "Restaurants",
+    "url": "/projects/restaurants/taco-bell/",
+    "image": "/images/card/projects/taco-bell/taco-bell.webp",
+    "description": "",
+    "featured": false
+  },
+  {
+    "title": "KFC",
+    "slug": "kfc",
+    "type": "Commercial",
+    "category": "Restaurants",
+    "url": "/projects/restaurants/kfc/",
+    "image": "/images/card/projects/kfc/kfc.webp",
+    "description": "",
+    "featured": false
+  },
+  {
+    "title": "Burger King",
+    "slug": "burger-king",
+    "type": "Commercial",
+    "category": "Restaurants",
+    "url": "/projects/restaurants/burger-king/",
+    "image": "/images/card/projects/burger-king/burger-king.webp",
+    "description": "",
+    "featured": false
+  },
+  {
+    "title": "Well Grounded Developments",
+    "slug": "well-grounded-developments",
+    "type": "Commercial",
+    "category": "Commercial Plaza",
+    "url": "/projects/commercial-plaza/well-grounded-developments/",
+    "image": "/images/card/projects/well-grounded-developments/well-grounded-developments.webp",
+    "description": "",
+    "featured": false
+  },
+  {
+    "title": "McCor Management Inc.",
+    "slug": "mccor-management-inc",
+    "type": "Commercial",
+    "category": "Commercial Plaza",
+    "url": "/projects/commercial-plaza/mccor-management-inc/",
+    "image": "/images/card/projects/mccor-management-inc/mccor-management-inc.webp",
+    "description": "",
+    "featured": false
+  },
+  {
+    "title": "SCM Insurance",
+    "slug": "scm-insurance",
+    "type": "Commercial",
+    "category": "Offices",
+    "url": "/projects/offices/SCM-insurance/",
+    "image": "/images/card/projects/scm-insurance/scm-insurance.webp",
+    "description": "",
+    "featured": false
+  },
+  {
+    "title": "34F Design",
+    "slug": "34f-design",
+    "type": "Commercial",
+    "category": "Commercial Design",
+    "url": "/projects/commercial-design/34f-design/",
+    "image": "/images/card/projects/34f-design/34f-design.webp",
+    "description": "",
+    "featured": false
+  },
+  {
+    "title": "Gulf Pacific",
+    "slug": "gulf-pacific",
+    "type": "Commercial",
+    "category": "Offices",
+    "url": "/projects/offices/gulf-pacific/",
+    "image": "/images/card/projects/gulf-pacific/gulf-pacific.webp",
+    "description": "",
+    "featured": false
+  },
+  {
+    "title": "Dogtopia",
+    "slug": "dogtopia",
+    "type": "Commercial",
+    "category": "Daycare",
+    "url": "/projects/daycare/dogtopia/",
+    "image": "/images/card/projects/dogtopia/dogtopia-daycare.webp",
+    "description": "",
+    "featured": false
+  },
+  {
+    "title": "Bo Li Laser Eye Clinic",
+    "slug": "bo-li-laser",
+    "type": "Commercial",
+    "category": "Offices",
+    "url": "/projects/offices/bo-li-laser-eye-clinic/",
+    "image": "/images/card/projects/bo-li-laser-clinic/bo-li-laser-clinic.webp",
+    "description": "",
+    "featured": false
+  },
+  {
+    "title": "Forward House",
+    "slug": "forward-house",
+    "type": "Commercial",
+    "category": "Offices",
+    "url": "/projects/offices/forward-house/",
+    "image": "/images/card/projects/forward-house/forward-house.webp",
+    "description": "",
+    "featured": false
+  },
+  {
+    "title": "2110 Keele St.",
+    "slug": "2110-keele",
+    "type": "Commercial",
+    "category": "Residential",
+    "url": "/projects/residential/2110-keele/",
+    "image": "/images/card/projects/2110-keele/2110-keele-st-apartments.webp",
+    "description": "",
+    "featured": false
+  },
+  {
+    "title": "Saranac Apartments",
+    "slug": "saranac-apartments",
+    "type": "Commercial",
+    "category": "Residential",
+    "url": "/projects/residential/saranac-apartments/",
+    "image": "/images/card/projects/saranac-apts/saranac-apartments.webp",
+    "description": "",
+    "featured": false
+  },
+  {
+    "title": "Fat Bastard",
+    "slug": "fat-bastard",
+    "type": "Commercial",
+    "category": "Restaurants",
+    "url": "/projects/restaurants/fat-bastard/",
+    "image": "/images/card/projects/fat-bastard/fat-bastard.webp",
+    "description": "",
+    "featured": false
+  },
+  {
+    "title": "Bone & Biscuit",
+    "slug": "bone-and-biscuit",
+    "type": "Commercial",
+    "category": "Retail",
+    "url": "/projects/retail/bone-and-biscuit/",
+    "image": "/images/card/projects/bone-and-biscuit/bone-and-biscuit.webp",
+    "description": "",
+    "featured": false
+  }
+]

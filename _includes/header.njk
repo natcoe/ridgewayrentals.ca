@@ -1,0 +1,43 @@
+<header class="site-header">
+
+  <div class="container header-row">
+
+    <a class="logo" href="/">
+      <div class="shape">
+        <div class="header-line-top"></div>
+        <img 
+          src="/images/ridgeway-logo-white.svg" 
+          class="logo-img" 
+          alt="Ridgeway Services & Construction logo" 
+        />
+        <div class="header-line-bottom"></div>
+      </div>
+    </a>
+
+
+    <div class="header-actions">
+
+      {% from "nav.njk" import renderNav %}
+
+      <nav class="site-nav" aria-label="Primary navigation">
+        {{ renderNav(navigation, page.url) }}
+      </nav>
+
+
+      <!-- Mobile hamburger -->
+      <button 
+        class="mobile-menu-toggle"
+        aria-expanded="false"
+        aria-label="Open navigation"
+      >
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+
+
+    </div>
+
+  </div>
+
+</header>

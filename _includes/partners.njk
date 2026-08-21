@@ -1,0 +1,21 @@
+<section class="trusted-by section section-full-alt">
+  <div class="container" data-reveal-group>
+    <h2 data-reveal>We Are Trusted By</h2>
+
+    <div class="logo-grid" data-reveal>
+      {% for partner in partners %}
+        {% if partner.url %}
+          <a class="logo-box-link" href="{{ partner.url }}">
+            <div class="logo-box">
+              <img src="{{ partner.src }}" alt="{{ partner.alt }}">
+            </div>
+          </a>
+        {% else %}
+          <div class="logo-box">
+            <img src="{{ partner.src }}" alt="{{ partner.alt }}">
+          </div>
+        {% endif %}
+      {% endfor %}
+    </div>
+  </div>
+</section>
