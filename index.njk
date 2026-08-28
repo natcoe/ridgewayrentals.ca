@@ -1,190 +1,184 @@
 ---
 layout: base.njk
-title: Commercial General Contractor | GTA & Southern Ontario | Ridgeway Services
-description: Family-owned general contractor serving the GTA, Hamilton & Southern Ontario for 30+ years. Retail, restaurant, office & tenant improvement construction done right.
+title: Trailer Rentals for Easy Disposal | Ridgeway Rentals
+description: Driveway-safe disposal trailer rentals in Burlington, Hamilton, Oakville, and Southern Ontario. We deliver, you fill it, and we pick it up.
 ---
 <section class="hero">
-  <div class="hero-slideshow" aria-hidden="true">
-    <div class="hero-slide hero-slide-1 is-active"></div>
-    <div class="hero-slide hero-slide-2"></div>
-    <div class="hero-slide hero-slide-3"></div>
-    <div class="hero-slide hero-slide-4"></div>
-    <div class="hero-slide hero-slide-5"></div>
-  </div>
   <div class="container hero-content">
-    <h1>Commercial & Residential Construction Across Ontario</h1>
-    <p class="eyebrow">Integrity | Teamwork | Tradition</p>
+    <h1>Ridgeway Rentals</h1>
+    <p class="eyebrow">DISPOSAL MADE EASY</p>
     <p>
-      Ridgeway Services & Construction delivers high-quality commercial construction solutions with integrity,
-      collaboration, and a commitment to excellence.
+      We drop the trailer off. You fill it up. We haul it away.
     </p>
     <div class="hero-actions">
       
-      <a class="btn btn-primary" href="/projects/">View Our Work</a>
-      <a class="btn btn-outline" href="/contact/">Contact Us</a>
-    </div>
-    <div class="hero-breadcrumbs" aria-label="Project gallery">
-      <button class="hero-breadcrumb active" type="button" aria-label="Show slide 1"></button>
-      <button class="hero-breadcrumb" type="button" aria-label="Show slide 2"></button>
-      <button class="hero-breadcrumb" type="button" aria-label="Show slide 3"></button>
-      <button class="hero-breadcrumb" type="button" aria-label="Show slide 4"></button>
-      <button class="hero-breadcrumb" type="button" aria-label="Show slide 5"></button>
+      <a class="btn btn-primary" href="#booking-title">BOOK NOW</a>
+      {# <a class="btn btn-outline" href="/contact/">Contact Us</a> #}
     </div>
   </div>
 </section>
 
-<section id="about" class="section section-full">
-  <div class="container" data-reveal-group>
-    <div class="sub-title primary" data-reveal>Our Services</div>
-    <h2 data-reveal>What We Do</h2>
-    <p data-reveal>End-to-end construction services tailored to your space, schedule and budget</p>
-
-      <div class="services-container" data-reveal>
-          <div class="card-container">
-              <div class="box">
-                <a href="/services/design-build" class="card-link">
-                  <div class="icon">
-                    <span class="material-symbols-outlined">design_services</span>
-                  </div>
-
-                  <h3>Design-Build Services</h3>
-
-                  <p>
-                    Collaborative planning and design to streamline your project from concept to completion.
-                  </p>
-
-                  <span class="learn-more">
-                    Learn More
-                    <span class="arrow">→</span>
-                  </span>
-                </a>
-              </div>
-
-              <div class="box">
-                <a href="/services/construction" class="card-link">
-                  <div class="icon">
-                    <span class="material-symbols-outlined">home_repair_service</span>
-                  </div>
-
-                  <h3>Construction</h3>
-
-                  <p>
-                    Transforming existing spaces to meet your business needs with minimal disruption.
-                  </p>
-
-                  <span class="learn-more">
-                    Learn More
-                    <span class="arrow">→</span>
-                  </span>
-                </a>
-              </div>
-
-              <div class="box">
-                <a href="/services/project-management" class="card-link">
-                  <div class="icon">
-                    <span class="material-symbols-outlined">assignment</span>
-                  </div>
-
-                  <h3>Project Management</h3>
-
-                  <p>
-                  Dedicated project management to ensure quality, timelines, and budgets are met.
-                  </p>
-
-                  <span class="learn-more">
-                    Learn More
-                    <span class="arrow">→</span>
-                  </span>
-                </a>
-              </div>
-
-              <div class="box">
-                <a href="/services/maintenance" class="card-link">
-                  <div class="icon">
-                    <span class="material-symbols-outlined">handyman</span>
-                  </div>
-
-                  <h3>Maintenance & Repairs</h3>
-
-                  <p>
-                  Reliable maintenance and repair services to keep your spaces running smoothly.
-                  </p>
-
-                  <span class="learn-more">
-                    Learn More
-                    <span class="arrow">→</span>
-                  </span>
-                </a>
-              </div>
-          </div>
+<section class="booking-section" aria-labelledby="booking-title">
+  <div class="container booking-panel">
+    <div class="booking-intro">
+      <span class="material-symbols-outlined booking-icon" aria-hidden="true">calendar_month</span>
+      <div class="booking-copy">
+        <h2 id="booking-title">Ready to book your trailer?</h2>
+        <p>Tell us when you need it and we'll confirm availability.</p>
       </div>
+    </div>
+
+    <form class="booking-form" action="/contact/" method="get">
+      <div class="booking-field">
+        <label for="drop-off-date">Drop off date</label>
+        <input id="drop-off-date" name="drop-off-date" type="date" placeholder="yyyy/mm/dd" required />
+      </div>
+
+      <div class="booking-field">
+        <label for="pick-up-date">Pick up date</label>
+        <input id="pick-up-date" name="pick-up-date" type="date" placeholder="yyyy/mm/dd" required />
+      </div>
+
+      <button class="btn btn-primary booking-submit" type="submit">Request trailer</button>
+    </form>
   </div>
 </section>
 
-{% include "recent-projects.njk" %}
+<div class="booking-modal" id="booking-modal" hidden>
+  <div class="booking-modal-backdrop" data-booking-modal-close></div>
+  <div class="booking-modal-dialog" role="dialog" aria-modal="true" aria-labelledby="booking-modal-title">
+    <button class="booking-modal-close" type="button" aria-label="Close booking request" data-booking-modal-close>
+      <span class="material-symbols-outlined" aria-hidden="true">close</span>
+    </button>
+
+    <div class="contact-form-content">
+      <p class="sub-title primary">Request a trailer</p>
+      <h2 id="booking-modal-title">Tell us where to reach you</h2>
+
+      <form name="trailer-request" method="POST" data-netlify="true" netlify class="contact-form booking-modal-form">
+        <input type="hidden" name="form-name" value="trailer-request" />
+
+        <div class="booking-modal-date-row">
+          <label>
+            Drop off date
+            <input type="date" name="drop-off-date" data-booking-drop-off placeholder="yyyy/mm/dd" required />
+          </label>
+          <label>
+            Pick up date
+            <input type="date" name="pick-up-date" data-booking-pick-up placeholder="yyyy/mm/dd" required />
+          </label>
+        </div>
+
+        <div class="form-row">
+          <input type="text" name="name" placeholder="Name*" required />
+          <input type="email" name="email" placeholder="Email*" required />
+          <input type="tel" name="phone" placeholder="Phone*" required />
+        </div>
+
+        <div class="form-row">
+          <input type="text" name="address-line-1" placeholder="Address Line 1*" required />
+          <input type="text" name="address-line-2" placeholder="Address Line 2 (Unit / Suite)" />
+        </div>
+
+        <div class="form-row">
+          <input type="text" name="city" placeholder="City*" required />
+          <input type="text" name="province" value="Ontario" readonly title="Province" />
+          <input type="text" name="postal-code" placeholder="Postal Code*" required />
+        </div>
+
+        <textarea name="disposal-details" placeholder="What are you disposing of?*" rows="4" required></textarea>
+
+        <button type="submit" class="btn btn-secondary">Send request</button>
+
+        <p class="micetype">
+          Submitting this form is a request only. Your rental is not confirmed until a Ridgeway Rentals team member confirms availability.<br/><br/>
+          We will be in touch soon to confirm your booking and collect payment details.
+        </p>
+      </form>
+    </div>
+
+    <div class="form-success" hidden>
+      <span class="material-symbols-outlined">check_circle</span>
+      <h2>Thank you!</h2>
+      <p>Your trailer request has been sent successfully. We'll be in touch soon.</p>
+    </div>
+  </div>
+</div>
+
+{% include "how-it-works.njk" %}
+
+<section class="trailer-showcase section section-full-alt" aria-labelledby="trailer-showcase-title">
+  <div class="container trailer-showcase-grid" data-reveal-group>
+    <div class="trailer-showcase-image" data-reveal>
+      <img src="/images/trailer-img.png" alt="Ridgeway Rentals disposal trailer" />
+    </div>
+
+    <div class="trailer-showcase-content" data-reveal>
+      <p class="sub-title primary">Driveway-safe disposal</p>
+      <h2 id="trailer-showcase-title">The right trailer for your cleanup</h2>
+      <p class="trailer-showcase-intro">A convenient, easy-to-load trailer for home projects, renovations, and site cleanups.</p>
+
+      <ul class="trailer-feature-list">
+        <li><span class="material-symbols-outlined" aria-hidden="true">check_circle</span>Rubber tires designed to protect your driveway</li>
+        <li><span class="material-symbols-outlined" aria-hidden="true">check_circle</span>Easy walk-in loading for bulky materials</li>
+        <li><span class="material-symbols-outlined" aria-hidden="true">check_circle</span>Delivered and picked up on your schedule</li>
+        <li><span class="material-symbols-outlined" aria-hidden="true">check_circle</span>Ideal for household, renovation, and yard waste</li>
+      </ul>
+
+      <div class="trailer-showcase-actions">
+        <p class="trailer-price"><span>Starting at</span>$325</p>
+        <a class="btn btn-primary" href="/booking/">Book the trailer</a>
+      </div>
+    </div>
+  </div>
+</section>
 
 <section class="why-choose section section-full">
   <div class="container" data-reveal-group>
-    <h2 data-reveal>Why Choose Ridgeway?</h2>
+    <p class="sub-title primary" data-reveal>Local. Reliable. Responsible.</p>
+    <h2 data-reveal>Why Choose Ridgeway Rentals?</h2>
 
     <div class="features-row" data-reveal>
       <div class="feature">
         <div class="icon">
-          <span class="material-symbols-outlined">verified_user</span>
+          <span class="material-symbols-outlined">calendar_check</span>
         </div>
-        <h3>30+ Years Experience</h3>
-        <p>A proven track record of successful projects</p>
+        <h3>Convenient</h3>
+        <p>We deliver to you and pick up when you're done.</p>
       </div>
 
       <div class="feature">
         <div class="icon">
-          <span class="material-symbols-outlined">group</span>
+          <span class="material-symbols-outlined">thumb_up</span>
         </div>
-        <h3>Dedicated Team</h3>
-        <p>Skilled professionals who care about your success</p>
+        <h3>Flexible</h3>
+        <p>Book for the amount of time you need.</p>
       </div>
 
       <div class="feature">
         <div class="icon">
-          <span class="material-symbols-outlined">check_circle</span>
+          <span class="material-symbols-outlined">attach_money</span>
         </div>
-        <h3>On Time, On Budget</h3>
-        <p>We deliver projects with precision and accountability</p>
+        <h3>Simple Pricing</h3>
+        <p>Transparent rates with no hidden fees.</p>
       </div>
 
       <div class="feature">
         <div class="icon">
-          <span class="material-symbols-outlined">handshake</span>
+          <span class="material-symbols-outlined">eco</span>
         </div>
-        <h3>Client Focused</h3>
-        <p>Built on integrity, transparency, and long-term relationships</p>
+        <h3>Responsible Disposal</h3>
+        <p>We dispose of waste responsibly and sustainably.</p>
       </div>
-
-      <div class="feature">
-        <div class="icon">
-          <span class="material-symbols-outlined">location_on</span>
-        </div>
-        <h3>Ontario Wide</h3>
-        <p>Proudly serving businesses across Ontario</p>
-      </div>
-
-      <div class="feature">
-        <div class="icon">
-          <span class="material-symbols-outlined">workspace_premium</span>
-        </div>
-        <h3>Quality Guaranteed</h3>
-        <p>Committed to the highest standards of quality</p>
-      </div>
-    </div>
   </div>
 </section>
 
-{% include "contact.njk" %}
+{# {% include "contact.njk" %} #}
 
-{% include "stats.njk" %}
+{# {% include "stats.njk" %} #}
 
-{% include "testimonials.njk" %}
+{# {% include "testimonials.njk" %} #}
 
-{% include "partners.njk" %}
+{# {% include "partners.njk" %} #}
 
-{% include "faq.njk" %}
+{# {% include "faq.njk" %} #}

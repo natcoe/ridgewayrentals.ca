@@ -1,0 +1,70 @@
+---
+layout: base.njk
+title: Request a Trailer | Ridgeway Rentals
+description: Request a driveway-safe disposal trailer from Ridgeway Rentals. Select your drop-off and pickup dates and we will confirm availability.
+---
+<section class="section section-full section-hero-header interior" data-reveal-group>
+  <div class="container-interior" data-reveal>
+    <h1>Booking</h1>
+    <p>
+      Select your preferred drop-off and pickup dates, tell us what you need to dispose of,
+      and our team will confirm trailer availability for your location.
+    </p>
+  </div>
+</section>
+
+<section class="section section-full" data-reveal-group>
+  <div class="container-interior">
+    <div class="contact-form-content">
+      <p class="sub-title primary">Request a trailer</p>
+      <h2 id="booking-modal-title">Tell us where to reach you</h2>
+
+      <form name="trailer-request" method="POST" data-netlify="true" netlify class="contact-form booking-modal-form">
+        <input type="hidden" name="form-name" value="trailer-request" />
+
+        <div class="booking-modal-date-row">
+          <label>
+            Drop off date
+            <input type="date" name="drop-off-date" data-booking-drop-off placeholder="yyyy/mm/dd" required />
+          </label>
+          <label>
+            Pick up date
+            <input type="date" name="pick-up-date" data-booking-pick-up placeholder="yyyy/mm/dd" required />
+          </label>
+        </div>
+
+        <div class="form-row">
+          <input type="text" name="name" placeholder="Name*" required />
+          <input type="email" name="email" placeholder="Email*" required />
+          <input type="tel" name="phone" placeholder="Phone*" required />
+        </div>
+
+        <div class="form-row">
+          <input type="text" name="address-line-1" placeholder="Address Line 1*" required />
+          <input type="text" name="address-line-2" placeholder="Address Line 2 (Unit / Suite)" />
+        </div>
+
+        <div class="form-row">
+          <input type="text" name="city" placeholder="City*" required />
+          <input type="text" name="province" value="Ontario" readonly title="Province" />
+          <input type="text" name="postal-code" placeholder="Postal Code*" required />
+        </div>
+
+        <textarea name="disposal-details" placeholder="What are you disposing of?*" rows="4" required></textarea>
+
+        <button type="submit" class="btn btn-secondary">Send request</button>
+
+        <p class="micetype">
+          Submitting this form is a request only. Your rental is not confirmed until a Ridgeway Rentals team member confirms availability.<br/><br/>
+          We will be in touch soon to confirm your booking and collect payment details.
+        </p>
+      </form>
+    </div>
+
+    <div class="form-success" hidden>
+      <span class="material-symbols-outlined">check_circle</span>
+      <h2>Thank you!</h2>
+      <p>Your trailer request has been sent successfully. We'll be in touch soon.</p>
+    </div>
+  </div>
+</section>
