@@ -277,10 +277,8 @@ h1 {
   letter-spacing: 0.03em;
 }
 
-.btn-outline:hover {
-  background: var(--secondary);
-  color: var(--white);
-  border: 1px solid var(--primary);
+.no-padding-top{
+  padding-top: 0 !important;
 }
 
 
@@ -2156,6 +2154,125 @@ span.flatpickr-weekday {
   color: var(--primary);
 }
 
+/* Contact page: matches the light booking modal form treatment. */
+.contact-page-box {
+  width: min(900px, calc(100% - 2rem));
+  margin: 4rem auto;
+  padding: 48px;
+  background: var(--surface);
+  color: var(--secondary);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  box-shadow: var(--shadow-md);
+}
+
+.contact-page-box h3 {
+  margin: 0 0 8px;
+  color: var(--secondary);
+  font-family: "Oswald", Arial, sans-serif;
+  font-size: 24px;
+  text-transform: uppercase;
+}
+
+.contact-page-box > p {
+  margin: 0 0 32px;
+  color: var(--grey-muted);
+  font-size: 15px;
+}
+
+.contact-page-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1.6fr) minmax(0, 1fr);
+  gap: 40px;
+  align-items: start;
+}
+
+.contact-page-form {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  color: var(--secondary);
+}
+
+.contact-page-form .form-row {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 12px;
+  margin: 0;
+}
+
+.contact-page-form input,
+.contact-page-form textarea {
+  width: 100%;
+  padding: 12px 14px;
+  background: var(--white) !important;
+  border: 1.5px solid var(--border) !important;
+  border-radius: 8px !important;
+  color: var(--secondary) !important;
+  font: inherit;
+  -webkit-text-fill-color: var(--secondary);
+  transition: border-color .2s ease, box-shadow .2s ease;
+}
+
+.contact-page-form input::placeholder,
+.contact-page-form textarea::placeholder {
+  color: var(--grey-muted) !important;
+  opacity: 1;
+}
+
+.contact-page-form input:hover,
+.contact-page-form textarea:hover {
+  border-color: var(--primary) !important;
+}
+
+.contact-page-form input:focus,
+.contact-page-form textarea:focus {
+  outline: none;
+  border-color: var(--primary) !important;
+  box-shadow: 0 0 0 4px rgba(252, 101, 0, .15);
+}
+
+.contact-page-form .btn-secondary {
+  align-self: flex-start;
+  padding: 12px 24px;
+  background: var(--primary);
+  border: 0;
+  border-radius: 8px;
+  color: var(--white);
+}
+
+.contact-page-form .btn-secondary:hover {
+  background: #e05800;
+  border: 0;
+  color: var(--white);
+}
+
+.contact-page-direct {
+  padding-left: 24px;
+  border-left: 1px solid var(--border);
+}
+
+.contact-page-direct h4 {
+  margin: 0 0 20px;
+  color: var(--primary);
+  font-size: 16px;
+  letter-spacing: .05em;
+  text-transform: uppercase;
+}
+
+.contact-page-direct .contact-details li,
+.contact-page-direct .contact-details a {
+  color: var(--secondary);
+}
+
+.contact-page-direct .contact-details a:hover {
+  color: var(--primary);
+}
+
+.contact-page-direct .material-symbols-outlined {
+  color: var(--primary);
+}
+
 
 /* =========================================================
    19. CHECKMARK LIST
@@ -2914,6 +3031,27 @@ ul.inluded-list li {
 }
 
 @media (max-width: 760px) {
+  .contact-page-box {
+    margin: 3rem auto;
+    padding: 32px 24px;
+  }
+
+  .contact-page-grid {
+    grid-template-columns: 1fr;
+    gap: 32px;
+  }
+
+  .contact-page-direct {
+    padding-top: 24px;
+    padding-left: 0;
+    border-top: 1px solid var(--border);
+    border-left: 0;
+  }
+
+  .contact-page-form .form-row {
+    grid-template-columns: 1fr;
+  }
+
   .faq-contact-grid {
     grid-template-columns: 1fr;
     gap: 32px;

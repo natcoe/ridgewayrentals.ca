@@ -300,6 +300,49 @@ if (bookingForm && bookingModal) {
   });
 }
 
+/* standalone booking page date pickers */
+const bookingPageForm = document.querySelector('.booking-page-form');
+
+if (bookingPageForm && window.flatpickr) {
+  const pageDropOffInput = bookingPageForm.querySelector('[name="drop-off-date"]');
+  const pagePickUpInput = bookingPageForm.querySelector('[name="pick-up-date"]');
+  const pagePickerConfig = {
+    minDate: 'today',
+    dateFormat: 'Y-m-d',
+    altInput: true,
+    altFormat: 'M j, Y',
+    altInputClass: 'flatpickr-alt-input',
+    disableMobile: true,
+    monthSelectorType: 'static',
+    onReady: (selectedDates, dateStr, instance) => {
+      if (instance.altInput) {
+        instance.altInput.placeholder = instance.input.placeholder || 'yyyy/mm/dd';
+      }
+    }
+  };
+
+  const pagePickUpPicker = flatpickr(pagePickUpInput, pagePickerConfig);
+  const pageDropOffPicker = flatpickr(pageDropOffInput, {
+    ...pagePickerConfig,
+    onChange: (selectedDates, dateStr) => {
+      pagePickUpPicker.set('minDate', dateStr || 'today');
+      if (pagePickUpInput.value && pagePickUpInput.value < dateStr) {
+        pagePickUpPicker.clear();
+      }
+    }
+  });
+
+  bookingPageForm.addEventListener('submit', event => {
+    if (pagePickUpInput.value < pageDropOffInput.value) {
+      pagePickUpInput.setCustomValidity('Pick up date must be on or after the drop off date.');
+    } else {
+      pagePickUpInput.setCustomValidity('');
+    }
+
+    if (!bookingPageForm.reportValidity()) event.preventDefault();
+  });
+}
+
 /* recent projects slideshow */
 const projectsSlideshow = document.querySelector('.projects-slideshow');
 
