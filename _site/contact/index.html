@@ -285,15 +285,9 @@
   <div class="faq-contact-box" data-reveal>
     <h3>Want to get in touch?</h3>
     <p>Fill this out and our team will get back to you shortly:</p>
-
     <div class="faq-contact-grid">
-      <form
-        name="faq-question"
-        method="POST"
-        data-netlify="true"
-        netlify-honeypot="bot-field"
-        class="contact-form booking-modal-form"
-      >
+      <div class="faq-question-form-content">
+        <form name="faq-question" method="POST" data-netlify="true" class="contact-form faq-question-form">
         <input type="hidden" name="form-name" value="faq-question" />
         <div class="form-row">
           <input type="text" name="name" placeholder="Name*" required />
@@ -302,7 +296,13 @@
         </div>
         <textarea name="question" placeholder="Ask your question here*" rows="4" required></textarea>
         <button type="submit" class="btn btn-secondary">Submit Question</button>
-      </form>
+        </form>
+        <div class="faq-form-success" hidden>
+          <span class="material-symbols-outlined" aria-hidden="true">check_circle</span>
+          <h4>Thank you!</h4>
+          <p>Your question has been sent. We'll be in touch soon.</p>
+        </div>
+      </div>
 
       <div class="faq-direct-contact">
         <h4>Direct Contact</h4>

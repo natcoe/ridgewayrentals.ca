@@ -134,73 +134,20 @@ if (mobileToggle && siteNav) {
 }
 
 /* contact form submission */
-/* contact form */
 
-const validateTrailerDates = form => {
-  const dropOffDate = form.querySelector('[name="drop-off-date"]');
-  const pickUpDate = form.querySelector('[name="pick-up-date"]');
-  const firstMissingDate = !dropOffDate?.value ? dropOffDate : !pickUpDate?.value ? pickUpDate : null;
+/* FAQ question form submission */
 
-  if (!firstMissingDate) return true;
+document.querySelectorAll('.faq-question-form').forEach(form => {
+  const successMessage = form.parentElement.querySelector('.faq-form-success');
 
-  const displayInput = firstMissingDate._flatpickr?.altInput || firstMissingDate;
-  displayInput.focus();
-  displayInput.setCustomValidity(`Select a ${firstMissingDate === dropOffDate ? 'drop off' : 'pick up'} date.`);
-  displayInput.reportValidity();
-  const clearDateError = () => displayInput.setCustomValidity('');
-  displayInput.addEventListener('input', clearDateError, { once: true });
-  displayInput.addEventListener('change', clearDateError, { once: true });
-  return false;
-};
+  if (!successMessage) return;
 
-document.querySelectorAll('.booking-page-form').forEach(form => {
-  form.addEventListener('submit', event => {
-    if (validateTrailerDates(form)) return;
-
-    event.preventDefault();
-    event.stopImmediatePropagation();
-  }, true);
-
-  form.querySelector('[type="submit"]')?.addEventListener('click', event => {
-    if (validateTrailerDates(form)) return;
-
-    event.preventDefault();
-    event.stopImmediatePropagation();
-  }, true);
-});
-
-document.addEventListener('submit', event => {
-  const form = event.target;
-
-  if (!(form instanceof HTMLFormElement) || !form.matches('.booking-page-form')) return;
-  if (validateTrailerDates(form)) return;
-
-  event.preventDefault();
-  event.stopImmediatePropagation();
-}, true);
-
-document.querySelectorAll('.contact-form').forEach(contactForm => {
-  const contactFormContent = contactForm.closest('.contact-form-content');
-  const formSuccess = contactFormContent?.parentElement.querySelector('.form-success');
-
-  if (contactFormContent && formSuccess) {
-    contactForm.addEventListener('submit', async (event) => {
-
-    if (contactForm.matches('.booking-page-form') && !validateTrailerDates(contactForm)) {
-      event.preventDefault();
-      event.stopImmediatePropagation();
-      return;
-    }
-
-    if (!contactForm.reportValidity()) {
-      event.preventDefault();
-      event.stopImmediatePropagation();
-      return;
-    }
-
+  form.addEventListener('submit', async (event) => {
     event.preventDefault();
 
-    const submitButton = contactForm.querySelector('[type="submit"]');
+    if (!form.reportValidity()) return;
+
+    const submitButton = form.querySelector('[type="submit"]');
 
     if (submitButton) {
       submitButton.disabled = true;
@@ -208,10 +155,9 @@ document.querySelectorAll('.contact-form').forEach(contactForm => {
     }
 
     try {
+      const formData = new FormData(form);
 
-      const formData = new FormData(contactForm);
-
-      await fetch('/', {
+      const response = await fetch('/', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/x-www-form-urlencoded',
@@ -219,26 +165,29 @@ document.querySelectorAll('.contact-form').forEach(contactForm => {
         body: new URLSearchParams(formData).toString(),
       });
 
-      contactFormContent.hidden = true;
-      formSuccess.hidden = false;
+      if (!response.ok) {
+        throw new Error(`Form submission failed: ${response.status}`);
+      }
+
+      // Hide the form
+      form.classList.add('is-submitted');
+
+      // Show the success message
+      successMessage.hidden = false;
 
     } catch (error) {
-
       console.error('Form submission error:', error);
 
       if (submitButton) {
         submitButton.disabled = false;
-        submitButton.textContent = 'Submit';
+        submitButton.textContent = 'Submit Question';
       }
 
       alert(
-        'There was a problem sending your message. Please try again.'
+        'There was a problem sending your question. Please try again.'
       );
-
     }
-
-    });
-  }
+  });
 });
 
 /* booking request modal */
