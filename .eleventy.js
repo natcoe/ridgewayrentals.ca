@@ -1,4 +1,6 @@
 module.exports = function (eleventyConfig) {
+  eleventyConfig.ignores.add("README.md");
+
   eleventyConfig.addPassthroughCopy("styles");
   eleventyConfig.addPassthroughCopy("images");
   eleventyConfig.addPassthroughCopy("scripts");
