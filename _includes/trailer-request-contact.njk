@@ -1,6 +1,8 @@
 <div class="contact-form-content">
-  <p class="sub-title primary">Request a trailer</p>
-  <h2 id="booking-modal-title">Tell us where to reach you</h2>
+  <div class="booking-form-heading">
+    <p class="sub-title primary">Request a trailer</p>
+    <h2 id="booking-modal-title">Tell us where to reach you</h2>
+  </div>
 
   <form
     name="trailer-request"
@@ -54,4 +56,19 @@
       We will be in touch soon to confirm your booking and collect payment details.
     </p>
   </form>
+
+  <div
+    class="booking-form-success"
+    hidden
+    role="status"
+    aria-live="polite"
+    tabindex="-1"
+  >
+    <span class="material-symbols-outlined" aria-hidden="true">check_circle</span>
+    <h3>Thank you!</h3>
+    <p>
+      Your trailer request has been sent. We'll be in touch soon to confirm
+      availability and payment details.
+    </p>
+  </div>
 </div>
