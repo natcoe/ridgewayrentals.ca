@@ -1,9 +1,9 @@
 {
-  "name": "Ridgeway Services & Construction Ltd.",
-  "phone": "905-315-8887",
-  "url": "https://ridgewayservices.ca",
-  "foundingYear": "1993",
-  "email": "info@ridgewayservices.ca",
+  "name": "Ridgeway Rentals",
+  "phone": "365-925-0155",
+  "url": "https://ridgewayrentals.ca",
+  "foundingYear": "2026",
+  "email": "sales@ridgewayrentals.ca",
   "address": {
       "street": "837 Hwy 6 N",
       "city": "Hamilton",
@@ -12,5 +12,9 @@
       "country": "CA"
   },
   "addressLink": "https://www.google.com/maps/dir/?api=1&destination=837+Hwy+6+N,+Hamilton,+ON",
-  "businessHours": "Monday - Friday: 8:00 AM - 5:00 PM"
+  "businessHours": "Monday - Friday: 8:00 AM - 5:00 PM",
+  "social": {
+    "facebook": "https://www.facebook.com/profile.php?id=61594393135920",
+    "instagram": "https://www.instagram.com/ridgeway.rentals/"
+  }
 }

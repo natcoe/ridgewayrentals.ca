@@ -136,13 +136,12 @@ if (mobileToggle && siteNav) {
 /* contact form submission */
 /* contact form */
 
-const contactForm = document.querySelector('.contact-form');
-const contactFormContent = document.querySelector('.contact-form-content');
-const formSuccess = document.querySelector('.form-success');
+document.querySelectorAll('.contact-form').forEach(contactForm => {
+  const contactFormContent = contactForm.closest('.contact-form-content');
+  const formSuccess = contactFormContent?.parentElement.querySelector('.form-success');
 
-if (contactForm && contactFormContent && formSuccess) {
-
-  contactForm.addEventListener('submit', async (event) => {
+  if (contactFormContent && formSuccess) {
+    contactForm.addEventListener('submit', async (event) => {
 
     event.preventDefault();
 
@@ -183,62 +182,165 @@ if (contactForm && contactFormContent && formSuccess) {
 
     }
 
-  });
-
-}
-
-/* homepage hero slideshow */
-const heroSlideshow = document.querySelector('.hero-slideshow');
-
-if (heroSlideshow) {
-  const slides = Array.from(heroSlideshow.querySelectorAll('.hero-slide'));
-  const breadcrumbs = Array.from(document.querySelectorAll('.hero-breadcrumb'));
-  const hero = heroSlideshow.closest('.hero');
-
-  if (slides.length > 1 && breadcrumbs.length === slides.length) {
-    let currentIndex = 0;
-    let autoplayTimer = null;
-
-    const showSlide = (index) => {
-      currentIndex = index;
-
-      slides.forEach((slide, slideIndex) => {
-        slide.classList.toggle('is-active', slideIndex === currentIndex);
-      });
-
-      breadcrumbs.forEach((breadcrumb, breadcrumbIndex) => {
-        const isActive = breadcrumbIndex === currentIndex;
-        breadcrumb.classList.toggle('active', isActive);
-        breadcrumb.setAttribute('aria-current', isActive ? 'true' : 'false');
-      });
-    };
-
-    const startAutoplay = () => {
-      window.clearInterval(autoplayTimer);
-      autoplayTimer = window.setInterval(() => {
-        showSlide((currentIndex + 1) % slides.length);
-      }, 5000);
-    };
-
-    breadcrumbs.forEach((breadcrumb, index) => {
-      breadcrumb.addEventListener('click', () => {
-        showSlide(index);
-        startAutoplay();
-      });
     });
+  }
+});
 
-    hero?.addEventListener('mouseenter', () => window.clearInterval(autoplayTimer));
-    hero?.addEventListener('mouseleave', startAutoplay);
-    hero?.addEventListener('focusin', () => window.clearInterval(autoplayTimer));
-    hero?.addEventListener('focusout', (event) => {
-      if (!hero.contains(event.relatedTarget)) {
-        startAutoplay();
+/* booking request modal */
+const bookingForm = document.querySelector('.booking-form');
+const bookingModal = document.querySelector('#booking-modal');
+
+if (bookingForm && bookingModal) {
+  const dropOffInput = bookingForm.querySelector('[name="drop-off-date"]');
+  const pickUpInput = bookingForm.querySelector('[name="pick-up-date"]');
+  const modalDropOffInput = bookingModal.querySelector('[data-booking-drop-off]');
+  const modalPickUpInput = bookingModal.querySelector('[data-booking-pick-up]');
+  const closeButtons = bookingModal.querySelectorAll('[data-booking-modal-close]');
+  let lastFocusedElement;
+
+  let dropOffPicker, pickUpPicker, modalDropOffPicker, modalPickUpPicker;
+
+  if (window.flatpickr) {
+    const fpConfig = {
+      minDate: 'today',
+      dateFormat: 'Y-m-d',
+      altInput: true,
+      altFormat: 'M j, Y',
+      altInputClass: 'flatpickr-alt-input',
+      disableMobile: true,
+      monthSelectorType: 'static',
+      onReady: (selectedDates, dateStr, instance) => {
+        if (instance.altInput) {
+          instance.altInput.placeholder = instance.input.placeholder || 'yyyy/mm/dd';
+        }
+      }
+    };
+
+    dropOffPicker = flatpickr(dropOffInput, {
+      ...fpConfig,
+      onChange: (selectedDates, dateStr) => {
+        if (modalDropOffPicker) modalDropOffPicker.setDate(dateStr, false);
+        if (pickUpPicker) pickUpPicker.set('minDate', dateStr || 'today');
+        if (modalPickUpPicker) modalPickUpPicker.set('minDate', dateStr || 'today');
       }
     });
 
-    showSlide(0);
-    startAutoplay();
+    pickUpPicker = flatpickr(pickUpInput, {
+      ...fpConfig,
+      onChange: (selectedDates, dateStr) => {
+        if (modalPickUpPicker) modalPickUpPicker.setDate(dateStr, false);
+      }
+    });
+
+    modalDropOffPicker = flatpickr(modalDropOffInput, {
+      ...fpConfig,
+      onChange: (selectedDates, dateStr) => {
+        if (dropOffPicker) dropOffPicker.setDate(dateStr, false);
+        if (modalPickUpPicker) modalPickUpPicker.set('minDate', dateStr || 'today');
+        if (pickUpPicker) pickUpPicker.set('minDate', dateStr || 'today');
+      }
+    });
+
+    modalPickUpPicker = flatpickr(modalPickUpInput, {
+      ...fpConfig,
+      onChange: (selectedDates, dateStr) => {
+        if (pickUpPicker) pickUpPicker.setDate(dateStr, false);
+      }
+    });
   }
+
+  const openBookingModal = () => {
+    lastFocusedElement = document.activeElement;
+    if (modalDropOffPicker && dropOffInput.value) {
+      modalDropOffPicker.setDate(dropOffInput.value, false);
+    } else {
+      modalDropOffInput.value = dropOffInput.value;
+    }
+
+    if (modalPickUpPicker && pickUpInput.value) {
+      modalPickUpPicker.setDate(pickUpInput.value, false);
+    } else {
+      modalPickUpInput.value = pickUpInput.value;
+    }
+
+    bookingModal.hidden = false;
+    document.body.classList.add('modal-open');
+    bookingModal.querySelector('.booking-modal-form input[name="name"]')?.focus();
+  };
+
+  const closeBookingModal = () => {
+    bookingModal.hidden = true;
+    document.body.classList.remove('modal-open');
+    lastFocusedElement?.focus();
+  };
+
+  const validateModalDates = () => {
+    if (modalDropOffInput.value && modalPickUpInput.value && modalPickUpInput.value < modalDropOffInput.value) {
+      modalPickUpInput.setCustomValidity('Pick up date must be on or after the drop off date.');
+    } else {
+      modalPickUpInput.setCustomValidity('');
+    }
+  };
+
+  bookingForm.addEventListener('submit', event => {
+    event.preventDefault();
+    if (dropOffInput.value && pickUpInput.value && pickUpInput.value < dropOffInput.value) {
+      pickUpInput.setCustomValidity('Pick up date must be on or after the drop off date.');
+    } else {
+      pickUpInput.setCustomValidity('');
+    }
+    if (bookingForm.reportValidity()) openBookingModal();
+  });
+
+  closeButtons.forEach(button => button.addEventListener('click', closeBookingModal));
+  modalDropOffInput.addEventListener('input', validateModalDates);
+  modalPickUpInput.addEventListener('input', validateModalDates);
+  document.addEventListener('keydown', event => {
+    if (event.key === 'Escape' && !bookingModal.hidden) closeBookingModal();
+  });
+}
+
+/* standalone booking page date pickers */
+const bookingPageForm = document.querySelector('.booking-page-form');
+
+if (bookingPageForm && window.flatpickr) {
+  const pageDropOffInput = bookingPageForm.querySelector('[name="drop-off-date"]');
+  const pagePickUpInput = bookingPageForm.querySelector('[name="pick-up-date"]');
+  const pagePickerConfig = {
+    minDate: 'today',
+    dateFormat: 'Y-m-d',
+    altInput: true,
+    altFormat: 'M j, Y',
+    altInputClass: 'flatpickr-alt-input',
+    disableMobile: true,
+    monthSelectorType: 'static',
+    onReady: (selectedDates, dateStr, instance) => {
+      if (instance.altInput) {
+        instance.altInput.placeholder = instance.input.placeholder || 'yyyy/mm/dd';
+      }
+    }
+  };
+
+  const pagePickUpPicker = flatpickr(pagePickUpInput, pagePickerConfig);
+  const pageDropOffPicker = flatpickr(pageDropOffInput, {
+    ...pagePickerConfig,
+    onChange: (selectedDates, dateStr) => {
+      pagePickUpPicker.set('minDate', dateStr || 'today');
+      if (pagePickUpInput.value && pagePickUpInput.value < dateStr) {
+        pagePickUpPicker.clear();
+      }
+    }
+  });
+
+  bookingPageForm.addEventListener('submit', event => {
+    if (pagePickUpInput.value < pageDropOffInput.value) {
+      pagePickUpInput.setCustomValidity('Pick up date must be on or after the drop off date.');
+    } else {
+      pagePickUpInput.setCustomValidity('');
+    }
+
+    if (!bookingPageForm.reportValidity()) event.preventDefault();
+  });
 }
 
 /* recent projects slideshow */

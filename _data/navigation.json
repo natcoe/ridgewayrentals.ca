@@ -1,36 +1,22 @@
 [
   {
-    "title": "Services",
-    "url": "/services/",
-    "children": [
-      {
-        "title": "Design-Build",
-        "url": "/services/design-build/"
-      },
-      {
-        "title": "Maintenance",
-        "url": "/services/maintenance/"
-      },
-      {
-        "title": "Project Management",
-        "url": "/services/project-management/"
-      },
-      {
-        "title": "Construction",
-        "url": "/services/construction/"
-      }
-    ]
+    "title": "HOME",
+    "url": "/"
   },
   {
-    "title": "Projects",
-    "url": "/projects/"
+    "title": "HOW IT WORKS",
+    "url": "/how-it-works/"
   },
   {
-    "title": "About Us",
-    "url": "/about/"
+    "title": "BOOKING",
+    "url": "/booking/"
   },
   {
-    "title": "Contact",
+    "title": "FAQS",
+    "url": "/faq/"
+  },
+  {
+    "title": "CONTACT",
     "url": "/contact/"
   }
 ]

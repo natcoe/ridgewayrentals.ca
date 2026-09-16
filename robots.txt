@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://www.ridgewayservices.ca/sitemap.xml
+Sitemap: https://ridgewayrentals.ca/sitemap.xml
