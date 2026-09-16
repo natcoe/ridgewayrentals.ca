@@ -136,12 +136,67 @@ if (mobileToggle && siteNav) {
 /* contact form submission */
 /* contact form */
 
+const validateTrailerDates = form => {
+  const dropOffDate = form.querySelector('[name="drop-off-date"]');
+  const pickUpDate = form.querySelector('[name="pick-up-date"]');
+  const firstMissingDate = !dropOffDate?.value ? dropOffDate : !pickUpDate?.value ? pickUpDate : null;
+
+  if (!firstMissingDate) return true;
+
+  const displayInput = firstMissingDate._flatpickr?.altInput || firstMissingDate;
+  displayInput.focus();
+  displayInput.setCustomValidity(`Select a ${firstMissingDate === dropOffDate ? 'drop off' : 'pick up'} date.`);
+  displayInput.reportValidity();
+  const clearDateError = () => displayInput.setCustomValidity('');
+  displayInput.addEventListener('input', clearDateError, { once: true });
+  displayInput.addEventListener('change', clearDateError, { once: true });
+  return false;
+};
+
+document.querySelectorAll('.booking-page-form').forEach(form => {
+  form.addEventListener('submit', event => {
+    if (validateTrailerDates(form)) return;
+
+    event.preventDefault();
+    event.stopImmediatePropagation();
+  }, true);
+
+  form.querySelector('[type="submit"]')?.addEventListener('click', event => {
+    if (validateTrailerDates(form)) return;
+
+    event.preventDefault();
+    event.stopImmediatePropagation();
+  }, true);
+});
+
+document.addEventListener('submit', event => {
+  const form = event.target;
+
+  if (!(form instanceof HTMLFormElement) || !form.matches('.booking-page-form')) return;
+  if (validateTrailerDates(form)) return;
+
+  event.preventDefault();
+  event.stopImmediatePropagation();
+}, true);
+
 document.querySelectorAll('.contact-form').forEach(contactForm => {
   const contactFormContent = contactForm.closest('.contact-form-content');
   const formSuccess = contactFormContent?.parentElement.querySelector('.form-success');
 
   if (contactFormContent && formSuccess) {
     contactForm.addEventListener('submit', async (event) => {
+
+    if (contactForm.matches('.booking-page-form') && !validateTrailerDates(contactForm)) {
+      event.preventDefault();
+      event.stopImmediatePropagation();
+      return;
+    }
+
+    if (!contactForm.reportValidity()) {
+      event.preventDefault();
+      event.stopImmediatePropagation();
+      return;
+    }
 
     event.preventDefault();
 
@@ -303,7 +358,7 @@ if (bookingForm && bookingModal) {
 /* standalone booking page date pickers */
 const bookingPageForm = document.querySelector('.booking-page-form');
 
-if (bookingPageForm && window.flatpickr) {
+if (bookingPageForm && !bookingForm && window.flatpickr) {
   const pageDropOffInput = bookingPageForm.querySelector('[name="drop-off-date"]');
   const pagePickUpInput = bookingPageForm.querySelector('[name="pick-up-date"]');
   const pagePickerConfig = {

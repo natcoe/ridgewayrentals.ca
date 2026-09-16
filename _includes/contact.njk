@@ -4,7 +4,13 @@
     <p>Fill this out and our team will get back to you shortly:</p>
 
     <div class="faq-contact-grid">
-      <form name="faq-question" method="POST" data-netlify="true" netlify class="contact-form faq-question-form">
+      <form
+        name="faq-question"
+        method="POST"
+        data-netlify="true"
+        netlify-honeypot="bot-field"
+        class="contact-form booking-modal-form"
+      >
         <input type="hidden" name="form-name" value="faq-question" />
         <div class="form-row">
           <input type="text" name="name" placeholder="Name*" required />
