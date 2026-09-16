@@ -60,6 +60,10 @@ a {
   text-decoration: none;
 }
 
+.hidden {
+  display: none;
+}
+
 
 /* =========================================================
    3. UTILITY CLASSES

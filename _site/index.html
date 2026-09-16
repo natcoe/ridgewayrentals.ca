@@ -322,8 +322,20 @@
       <p class="sub-title primary">Request a trailer</p>
       <h2 id="booking-modal-title">Tell us where to reach you</h2>
 
-      <form name="trailer-request" method="POST" data-netlify="true" netlify class="contact-form booking-modal-form">
+      <form
+        name="trailer-request"
+        method="POST"
+        data-netlify="true"
+        netlify-honeypot="bot-field"
+        class="contact-form booking-modal-form"
+      >
         <input type="hidden" name="form-name" value="trailer-request" />
+        <p class="hidden">
+          <label>
+            Don't fill this out if you're human:
+            <input name="bot-field" type="text" />
+          </label>
+        </p>
 
         <div class="booking-modal-date-row">
           <label>
