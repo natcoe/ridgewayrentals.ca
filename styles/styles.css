@@ -2042,7 +2042,8 @@ span.flatpickr-weekday {
 }
 
 /* Bottom FAQ Contact Section */
-.faq-contact-box {
+.faq-contact-box,
+.contact-box {
   max-width: 900px;
   margin: 64px auto;
   background: var(--secondary);
@@ -2053,7 +2054,8 @@ span.flatpickr-weekday {
   box-shadow: var(--shadow-md);
 }
 
-.faq-contact-box h3 {
+.faq-contact-box h3,
+.contact-box h3 {
   color: var(--white);
   font-size: 24px;
   margin: 0 0 8px;
@@ -2061,13 +2063,15 @@ span.flatpickr-weekday {
   text-transform: uppercase;
 }
 
-.faq-contact-box > p {
+.faq-contact-box > p,
+.contact-box > p {
   color: rgba(255, 255, 255, 0.85);
   font-size: 15px;
   margin: 0 0 32px;
 }
 
-.faq-contact-grid {
+.faq-contact-grid,
+.contact-grid {
   display: grid;
   grid-template-columns: 1.6fr 1fr;
   gap: 40px;
@@ -2088,7 +2092,9 @@ span.flatpickr-weekday {
 }
 
 .faq-contact-box .faq-question-form input,
-.faq-contact-box .faq-question-form textarea {
+.faq-contact-box .faq-question-form textarea,
+.contact-box .contact-form input,
+.contact-box .contact-form textarea {
   width: 100%;
   background: rgba(255, 255, 255, 0.08) !important;
   border: 1px solid rgba(255, 255, 255, 0.2) !important;
@@ -2100,12 +2106,16 @@ span.flatpickr-weekday {
 }
 
 .faq-contact-box .faq-question-form input::placeholder,
-.faq-contact-box .faq-question-form textarea::placeholder {
+.faq-contact-box .faq-question-form textarea::placeholder,
+.contact-box .contact-form input::placeholder,
+.contact-box .contact-form textarea::placeholder {
   color: rgba(255, 255, 255, 0.6) !important;
 }
 
 .faq-contact-box .faq-question-form input:focus,
-.faq-contact-box .faq-question-form textarea:focus {
+.faq-contact-box .faq-question-form textarea:focus,
+.contact-box .contact-form input:focus,
+.contact-box .contact-form textarea:focus {
   outline: none !important;
   border-color: var(--primary) !important;
   background: rgba(255, 255, 255, 0.14) !important;
