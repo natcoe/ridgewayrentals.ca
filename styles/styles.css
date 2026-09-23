@@ -64,6 +64,10 @@ a {
   display: none;
 }
 
+.underline {
+  text-decoration: underline;
+}
+
 
 /* =========================================================
    3. UTILITY CLASSES
