@@ -611,7 +611,7 @@ h1 {
   display: flex;
   align-items: center;
   padding: 5rem 0;
-  background-image: url('/images/ridgeway-rentals-bin-image.png');
+  background-image: url('/images/ridgeway-rentals-bin-image.webp');
   background-size: cover;
   background-position: center;
 }
