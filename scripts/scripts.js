@@ -963,7 +963,7 @@ if (bookingPageForm && !bookingForm) {
 
   const validatePageDates = () => {
 
-    validateRequiredPageDates();
+    return validateRequiredPageDates();
 
   };
 
