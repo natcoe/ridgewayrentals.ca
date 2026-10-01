@@ -10,7 +10,7 @@
     <!-- End Google Tag Manager -->
 
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no, maximum-scale=1, viewport-fit=cover">
     <title>Contact Ridgeway Rentals | Hamilton, Ontario</title>
     <meta name="description" content="Contact Ridgeway Rentals in Hamilton, Ontario with questions about disposal bin rentals, pricing, delivery, service areas, or booking." />
     <link rel="canonical" href="https://ridgewayrentals.ca/contact/" />
@@ -300,17 +300,24 @@
     <p>Have a question about disposal bin rentals? Fill out the form and our team will get back to you shortly.</p>
     <div class="contact-grid">
       <div class="contact-form-content">
-        <form name="contact" method="POST" data-netlify="true" class="contact-form">
-        <input type="hidden" name="form-name" value="contact" />
-        <div class="form-row">
-          <input type="text" name="name" placeholder="Name*" required />
-          <input type="email" name="email" placeholder="Email*" required />
-          <input type="tel" name="phone" placeholder="Phone*" required />
-        </div>
-        <textarea name="message" placeholder="How can we help?*" rows="4" required></textarea>
-        <button type="submit" class="btn btn-secondary">Send Message</button>
+        <form 
+          id="contact-form"
+          name="contact"
+          method="POST" 
+          data-netlify="true"
+          class="contact-form"
+        >
+          <input type="hidden" name="form-name" value="contact" />
+          <div class="form-row">
+            <input type="text" name="name" placeholder="Name*" required />
+            <input type="email" name="email" placeholder="Email*" required />
+            <input type="tel" name="phone" placeholder="Phone*" required />
+          </div>
+          <textarea name="message" placeholder="How can we help?*" rows="4" required></textarea>
+          <button type="submit" class="btn btn-secondary">Send Message</button>
         </form>
-        <div class="contact-form-success" hidden>
+
+        <div class="contact-form-success" hidden tabindex="-1">
           <span class="material-symbols-outlined" aria-hidden="true">check_circle</span>
           <h4>Thank you!</h4>
           <p>Your message has been sent. We'll be in touch soon.</p>
@@ -363,11 +370,11 @@
     <div class="footer-col">
       <h4>Our Companies</h4>
       <ul>
-        <li><a href="https://ridgewayservices.ca">Ridgeway Services</a></li>
-        <li><a href="#">Ramrock Electrical</a></li>
-        <li><a href="#">Heritage Commercial Interiors</a></li>
-        <li><a href="https://ridgewayrentals.ca">Ridgeway Disposal Solutions</a></li>
-        <li><a href="#">Ridgeway Storage Rentals</a></li>
+        <li><a href="https://ridgewayservices.ca" target="_blank" rel="noopener noreferrer">Ridgeway Services</a></li>
+        <li><a href="https://ramrock.ca" target="_blank" rel="noopener noreferrer">Ramrock Electrical</a></li>
+        <li><a href="https://heritageinteriors.ca/" target="_blank" rel="noopener noreferrer">Heritage Commercial Interiors</a></li>
+        <li><a href="https://ridgewayrentals.ca" target="_blank" rel="noopener noreferrer">Ridgeway Disposal Solutions</a></li>
+        
       </ul>
     </div>
 
