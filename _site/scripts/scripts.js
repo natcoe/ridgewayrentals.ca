@@ -210,6 +210,7 @@ if (bookingForm && bookingModal) {
   const modalPickUpInput = bookingModal.querySelector('[data-booking-pick-up]');
 
   const modalSuccessMessage = bookingModal.querySelector('.booking-form-success');
+  const modalDateAlert = modalForm?.querySelector('.booking-form-alert');
 
   /*
    * Find the existing modal heading elements.
@@ -217,6 +218,7 @@ if (bookingForm && bookingModal) {
    */
   const modalSubtitle = bookingModal.querySelector('.contact-form-content .sub-title');
   const modalTitle = bookingModal.querySelector('#booking-modal-title');
+  const modalIntro = bookingModal.querySelector('.booking-form-intro');
 
   const closeButtons = bookingModal.querySelectorAll('[data-booking-modal-close]');
 
@@ -226,6 +228,130 @@ if (bookingForm && bookingModal) {
   let pickUpPicker;
   let modalDropOffPicker;
   let modalPickUpPicker;
+
+  const clearBookingDateErrorState = (
+    currentDropOffInput,
+    currentPickUpInput,
+    currentDropOffPicker,
+    currentPickUpPicker,
+    currentAlert
+  ) => {
+
+    const dropOffVisibleInput =
+      currentDropOffPicker?.altInput || currentDropOffInput;
+
+    const pickUpVisibleInput =
+      currentPickUpPicker?.altInput || currentPickUpInput;
+
+    dropOffVisibleInput?.removeAttribute('aria-invalid');
+    pickUpVisibleInput?.removeAttribute('aria-invalid');
+
+    if (currentDropOffInput) {
+      currentDropOffInput.setCustomValidity('');
+    }
+
+    if (currentPickUpInput) {
+      currentPickUpInput.setCustomValidity('');
+    }
+
+    if (currentAlert) {
+      currentAlert.hidden = true;
+      currentAlert.textContent = '';
+    }
+
+  };
+
+  const getBookingDateError = (
+    currentDropOffInput,
+    currentPickUpInput,
+    currentDropOffPicker,
+    currentPickUpPicker,
+    currentAlert
+  ) => {
+
+    clearBookingDateErrorState(
+      currentDropOffInput,
+      currentPickUpInput,
+      currentDropOffPicker,
+      currentPickUpPicker,
+      currentAlert
+    );
+
+    if (!currentDropOffInput?.value) {
+      return {
+        input: currentDropOffInput,
+        picker: currentDropOffPicker,
+        message: 'Please select a drop off date.'
+      };
+    }
+
+    if (!currentPickUpInput?.value) {
+      return {
+        input: currentPickUpInput,
+        picker: currentPickUpPicker,
+        message: 'Please select a pick up date.'
+      };
+    }
+
+    if (currentPickUpInput.value < currentDropOffInput.value) {
+      return {
+        input: currentPickUpInput,
+        picker: currentPickUpPicker,
+        message: 'Pick up date must be on or after the drop off date.'
+      };
+    }
+
+    return null;
+
+  };
+
+  const showBookingDateError = (dateError, currentAlert) => {
+
+    if (!dateError?.input) {
+      return;
+    }
+
+    dateError.input.setCustomValidity(dateError.message);
+
+    const visibleInput =
+      dateError.picker?.altInput || dateError.input;
+
+    visibleInput?.setAttribute('aria-invalid', 'true');
+    visibleInput?.focus();
+
+    dateError.picker?.open?.();
+
+    if (currentAlert) {
+      currentAlert.hidden = false;
+      currentAlert.textContent = dateError.message;
+    }
+
+  };
+
+  const validateRequiredBookingDates = (
+    currentDropOffInput,
+    currentPickUpInput,
+    currentDropOffPicker,
+    currentPickUpPicker,
+    currentAlert
+  ) => {
+
+    const dateError = getBookingDateError(
+      currentDropOffInput,
+      currentPickUpInput,
+      currentDropOffPicker,
+      currentPickUpPicker,
+      currentAlert
+    );
+
+    if (dateError) {
+      showBookingDateError(dateError, currentAlert);
+      return false;
+    }
+
+    return true;
+
+  };
 
 
   /* booking date pickers */
@@ -373,6 +499,14 @@ if (bookingForm && bookingModal) {
     }
 
 
+    clearBookingDateErrorState(
+      modalDropOffInput,
+      modalPickUpInput,
+      modalDropOffPicker,
+      modalPickUpPicker,
+      modalDateAlert
+    );
+
     bookingModal.hidden = false;
 
     document.body.classList.add('modal-open');
@@ -389,6 +523,14 @@ if (bookingForm && bookingModal) {
 
   const closeBookingModal = () => {
 
+    clearBookingDateErrorState(
+      modalDropOffInput,
+      modalPickUpInput,
+      modalDropOffPicker,
+      modalPickUpPicker,
+      modalDateAlert
+    );
+
     bookingModal.hidden = true;
 
     document.body.classList.remove('modal-open');
@@ -402,21 +544,13 @@ if (bookingForm && bookingModal) {
 
   const validateModalDates = () => {
 
-    if (
-      modalDropOffInput.value &&
-      modalPickUpInput.value &&
-      modalPickUpInput.value < modalDropOffInput.value
-    ) {
-
-      modalPickUpInput.setCustomValidity(
-        'Pick up date must be on or after the drop off date.'
-      );
-
-    } else {
-
-      modalPickUpInput.setCustomValidity('');
-
-    }
+    clearBookingDateErrorState(
+      modalDropOffInput,
+      modalPickUpInput,
+      modalDropOffPicker,
+      modalPickUpPicker,
+      modalDateAlert
+    );
 
   };
 
@@ -427,27 +561,7 @@ if (bookingForm && bookingModal) {
 
     event.preventDefault();
 
-
-    if (
-      dropOffInput.value &&
-      pickUpInput.value &&
-      pickUpInput.value < dropOffInput.value
-    ) {
-
-      pickUpInput.setCustomValidity(
-        'Pick up date must be on or after the drop off date.'
-      );
-
-    } else {
-
-      pickUpInput.setCustomValidity('');
-
-    }
-
-
-    if (bookingForm.reportValidity()) {
-      openBookingModal();
-    }
+    openBookingModal();
 
   });
 
@@ -464,6 +578,18 @@ if (bookingForm && bookingModal) {
       /* Validate dates */
 
       validateModalDates();
+
+      if (
+        !validateRequiredBookingDates(
+          modalDropOffInput,
+          modalPickUpInput,
+          modalDropOffPicker,
+          modalPickUpPicker,
+          modalDateAlert
+        )
+      ) {
+        return;
+      }
 
 
       /* Validate all required fields */
@@ -533,6 +659,10 @@ if (bookingForm && bookingModal) {
           modalTitle.hidden = true;
         }
 
+        if (modalIntro) {
+          modalIntro.hidden = true;
+        }
+
 
         /*
          * Show our own confirmation message.
@@ -589,6 +719,28 @@ if (bookingForm && bookingModal) {
     validateModalDates
   );
 
+  dropOffInput?.addEventListener(
+    'input',
+    () => clearBookingDateErrorState(
+      dropOffInput,
+      pickUpInput,
+      dropOffPicker,
+        pickUpPicker,
+        null
+    )
+  );
+
+  pickUpInput?.addEventListener(
+    'input',
+    () => clearBookingDateErrorState(
+      dropOffInput,
+      pickUpInput,
+      dropOffPicker,
+        pickUpPicker,
+        null
+    )
+  );
+
 
   /* escape key */
 
@@ -626,12 +778,109 @@ if (bookingPageForm && !bookingForm) {
 
   const pageSuccessMessage =
     pageContent?.querySelector('.booking-form-success');
+  const pageDateAlert =
+    bookingPageForm.querySelector('.booking-form-alert');
 
   const pageSubtitle =
     pageContent?.querySelector('.sub-title');
 
   const pageTitle =
     pageContent?.querySelector('#booking-modal-title');
+
+  const pageIntro =
+    pageContent?.querySelector('.booking-form-intro');
+
+  let pageDropOffPicker;
+  let pagePickUpPicker;
+
+  const clearBookingPageDateErrorState = () => {
+
+    const dropOffVisibleInput =
+      pageDropOffPicker?.altInput || pageDropOffInput;
+
+    const pickUpVisibleInput =
+      pagePickUpPicker?.altInput || pagePickUpInput;
+
+    dropOffVisibleInput?.removeAttribute('aria-invalid');
+    pickUpVisibleInput?.removeAttribute('aria-invalid');
+
+    pageDropOffInput?.setCustomValidity('');
+    pagePickUpInput?.setCustomValidity('');
+
+    if (pageDateAlert) {
+      pageDateAlert.hidden = true;
+      pageDateAlert.textContent = '';
+    }
+
+  };
+
+  const getBookingPageDateError = () => {
+
+    clearBookingPageDateErrorState();
+
+    if (!pageDropOffInput?.value) {
+      return {
+        input: pageDropOffInput,
+        picker: pageDropOffPicker,
+        message: 'Please select a drop off date.'
+      };
+    }
+
+    if (!pagePickUpInput?.value) {
+      return {
+        input: pagePickUpInput,
+        picker: pagePickUpPicker,
+        message: 'Please select a pick up date.'
+      };
+    }
+
+    if (pagePickUpInput.value < pageDropOffInput.value) {
+      return {
+        input: pagePickUpInput,
+        picker: pagePickUpPicker,
+        message: 'Pick up date must be on or after the drop off date.'
+      };
+    }
+
+    return null;
+
+  };
+
+  const showBookingPageDateError = (dateError) => {
+
+    if (!dateError?.input) {
+      return;
+    }
+
+    dateError.input.setCustomValidity(dateError.message);
+
+    const visibleInput =
+      dateError.picker?.altInput || dateError.input;
+
+    visibleInput?.setAttribute('aria-invalid', 'true');
+    visibleInput?.focus();
+
+    dateError.picker?.open?.();
+
+    if (pageDateAlert) {
+      pageDateAlert.hidden = false;
+      pageDateAlert.textContent = dateError.message;
+    }
+
+  };
+
+  const validateRequiredPageDates = () => {
+
+    const dateError = getBookingPageDateError();
+
+    if (dateError) {
+      showBookingPageDateError(dateError);
+      return false;
+    }
+
+    return true;
+
+  };
 
 
   /* standalone booking page date pickers */
@@ -672,14 +921,14 @@ if (bookingPageForm && !bookingForm) {
     };
 
 
-    const pagePickUpPicker =
+    pagePickUpPicker =
       flatpickr(
         pagePickUpInput,
         pagePickerConfig
       );
 
 
-    flatpickr(
+    pageDropOffPicker = flatpickr(
       pageDropOffInput,
       {
 
@@ -714,23 +963,7 @@ if (bookingPageForm && !bookingForm) {
 
   const validatePageDates = () => {
 
-    if (
-      pageDropOffInput &&
-      pagePickUpInput &&
-      pageDropOffInput.value &&
-      pagePickUpInput.value &&
-      pagePickUpInput.value < pageDropOffInput.value
-    ) {
-
-      pagePickUpInput.setCustomValidity(
-        'Pick up date must be on or after the drop off date.'
-      );
-
-    } else if (pagePickUpInput) {
-
-      pagePickUpInput.setCustomValidity('');
-
-    }
+    validateRequiredPageDates();
 
   };
 
@@ -746,7 +979,9 @@ if (bookingPageForm && !bookingForm) {
 
       /* Validate dates */
 
-      validatePageDates();
+      if (!validatePageDates()) {
+        return;
+      }
 
 
       /* Validate the complete form */
@@ -825,6 +1060,13 @@ if (bookingPageForm && !bookingForm) {
         if (pageTitle) {
 
           pageTitle.hidden = true;
+
+        }
+
+
+        if (pageIntro) {
+
+          pageIntro.hidden = true;
 
         }
 
@@ -1133,1047 +1375,19 @@ if (projectsSlideshow) {
 
   }
 
-}
-
-
-/* project gallery lightbox */
-
-const lightbox =
-  document.querySelector('.lightbox');
-
-if (lightbox) {
-
-  const lightboxImage =
-    lightbox.querySelector('.lightbox-image');
-
-  const closeButton =
-    lightbox.querySelector('.lightbox-close');
-
-  const prevButton =
-    lightbox.querySelector('.lightbox-prev');
-
-  const nextButton =
-    lightbox.querySelector('.lightbox-next');
-
-  const counter =
-    lightbox.querySelector('.lightbox-counter');
-
-  const galleryItems =
-    Array.from(
-      document.querySelectorAll('.gallery-item')
-    );
-
-
-  if (
-    galleryItems.length &&
-    lightboxImage &&
-    closeButton &&
-    prevButton &&
-    nextButton &&
-    counter
-  ) {
-
-    let currentIndex = 0;
-
-
-    const updateLightbox = (index) => {
-
-      const item =
-        galleryItems[index];
-
-      if (!item) return;
-
-
-      const image =
-        item.querySelector('img');
-
-      if (!image) return;
-
-
-      currentIndex = index;
-
-      lightboxImage.src = image.src;
-
-      lightboxImage.alt = image.alt;
-
-      counter.textContent =
-        `${index + 1} / ${galleryItems.length}`;
-
-    };
-
-
-    const openLightbox = (index) => {
-
-      updateLightbox(index);
-
-      lightbox.classList.add('active');
-
-      document.body.style.overflow =
-        'hidden';
-
-    };
-
-
-    const closeLightbox = () => {
-
-      lightbox.classList.remove('active');
-
-      document.body.style.overflow =
-        '';
-
-    };
-
-
-    galleryItems.forEach(
-      (item, index) => {
-
-        item.addEventListener(
-          'click',
-          () => openLightbox(index)
-        );
-
-      }
-    );
-
-
-    closeButton.addEventListener(
-      'click',
-      closeLightbox
-    );
-
-
-    prevButton.addEventListener(
-      'click',
-      () => {
-
-        const nextIndex =
-          (
-            currentIndex -
-            1 +
-            galleryItems.length
-          ) %
-          galleryItems.length;
-
-
-        updateLightbox(nextIndex);
-
-      }
-    );
-
-
-    nextButton.addEventListener(
-      'click',
-      () => {
-
-        const nextIndex =
-          (
-            currentIndex +
-            1
-          ) %
-          galleryItems.length;
-
-
-        updateLightbox(nextIndex);
-
-      }
-    );
-
-
-    lightbox.addEventListener(
-      'click',
-      (event) => {
-
-        if (event.target === lightbox) {
-          closeLightbox();
-        }
-
-      }
-    );
-
-
-    document.addEventListener(
-      'keydown',
-      (event) => {
-
-        if (
-          !lightbox.classList.contains('active')
-        ) {
-          return;
-        }
-
-
-        if (event.key === 'Escape') {
-          closeLightbox();
-        }
-
-
-        if (event.key === 'ArrowLeft') {
-
-          const nextIndex =
-            (
-              currentIndex -
-              1 +
-              galleryItems.length
-            ) %
-            galleryItems.length;
-
-
-          updateLightbox(nextIndex);
-
-        }
-
-
-        if (event.key === 'ArrowRight') {
-
-          const nextIndex =
-            (
-              currentIndex +
-              1
-            ) %
-            galleryItems.length;
-
-
-          updateLightbox(nextIndex);
-
-        }
-
-      }
-    );
-
-  }
-
-}
-
-
-/* project filters */
-
-document
-  .querySelectorAll('.project-tile img')
-  .forEach((image) => {
-
-    image.addEventListener(
-      'error',
-      () => {
-        image.remove();
-      }
-    );
-
-  });
-
-
-document
-  .querySelectorAll('.filter-bar')
-  .forEach((filterBar) => {
-
-    const buttons =
-      filterBar.querySelectorAll(
-        '.filter-btn'
-      );
-
-    const projectsPage =
-      filterBar.closest(
-        '.projects-page'
-      );
-
-
-    if (!projectsPage) return;
-
-
-    const grid =
-      projectsPage.querySelector(
-        '.project-grid'
-      );
-
-
-    const tiles =
-      grid
-        ? Array.from(
-            grid.querySelectorAll(
-              '.project-tile'
-            )
-          )
-        : [];
-
-
-    if (!tiles.length) return;
-
-
-    const HEIGHT_TRANSITION_MS = 350;
-    const SETTLE_MS = 380;
-
-
-    buttons.forEach((button) => {
-
-      button.addEventListener(
-        'click',
-        () => {
-
-          const filter =
-            button.dataset.filter ||
-            'all';
-
-
-          const footer =
-            document.querySelector(
-              '.site-footer'
-            );
-
-
-          const startHeight =
-            grid.getBoundingClientRect()
-              .height;
-
-
-          projectsPage.classList.add(
-            'is-filtering'
-          );
-
-          footer?.classList.add(
-            'is-filtering'
-          );
-
-
-          buttons.forEach((btn) => {
-
-            btn.classList.toggle(
-              'active',
-              btn === button
-            );
-
-          });
-
-
-          const visibleTiles = [];
-          const hiddenTiles = [];
-
-
-          tiles.forEach((tile) => {
-
-            const matches =
-              filter === 'all' ||
-              tile.dataset.category === filter;
-
-
-            tile.classList.remove(
-              'is-visible',
-              'is-appearing'
-            );
-
-
-            tile.classList.toggle(
-              'is-hidden',
-              !matches
-            );
-
-
-            tile.classList.remove(
-              'is-removed'
-            );
-
-
-            if (matches) {
-
-              tile.style.display = '';
-
-              visibleTiles.push(tile);
-
-              tile.classList.add(
-                'is-appearing'
-              );
-
-
-              requestAnimationFrame(() => {
-
-                requestAnimationFrame(() => {
-
-                  tile.classList.add(
-                    'is-visible'
-                  );
-
-                });
-
-              });
-
-            } else {
-
-              hiddenTiles.push(tile);
-
-            }
-
-          });
-
-
-          visibleTiles
-            .concat(hiddenTiles)
-            .forEach((tile) => {
-
-              grid.appendChild(tile);
-
-            });
-
-
-          tiles.forEach((tile) => {
-
-            if (
-              tile.classList.contains(
-                'is-hidden'
-              )
-            ) {
-
-              tile.style.display = 'none';
-
-            }
-
-          });
-
-
-          const endHeight =
-            grid.scrollHeight;
-
-
-          tiles.forEach((tile) => {
-
-            if (
-              tile.classList.contains(
-                'is-hidden'
-              )
-            ) {
-
-              tile.style.display = '';
-
-            }
-
-          });
-
-
-          grid.style.height =
-            `${startHeight}px`;
-
-          grid.style.overflow =
-            'hidden';
-
-          grid.style.transition =
-            `height ${HEIGHT_TRANSITION_MS}ms ease`;
-
-
-          requestAnimationFrame(() => {
-
-            grid.style.height =
-              `${endHeight}px`;
-
-          });
-
-
-          window.setTimeout(() => {
-
-            tiles.forEach((tile) => {
-
-              if (
-                tile.classList.contains(
-                  'is-hidden'
-                )
-              ) {
-
-                tile.classList.add(
-                  'is-removed'
-                );
-
-                tile.style.display =
-                  'none';
-
-              }
-
-            });
-
-
-            grid.style.height = '';
-
-            grid.style.overflow = '';
-
-            grid.style.transition = '';
-
-          }, HEIGHT_TRANSITION_MS);
-
-
-          window.setTimeout(() => {
-
-            projectsPage.classList.remove(
-              'is-filtering'
-            );
-
-            footer?.classList.remove(
-              'is-filtering'
-            );
-
-          }, SETTLE_MS);
-
-        }
-      );
-
-    });
-
-  });
-
-
-/* testimonials slideshow */
-
-const testimonialsSlideshow =
-  document.querySelector(
-    '.testimonials-slideshow'
+  pageDropOffInput?.addEventListener(
+    'input',
+    clearBookingPageDateErrorState
   );
 
-
-if (testimonialsSlideshow) {
-
-  const track =
-    testimonialsSlideshow.querySelector(
-      '.slideshow-track'
-    );
-
-  const breadcrumbs =
-    testimonialsSlideshow.querySelector(
-      '.slideshow-breadcrumbs'
-    );
-
-  const slides =
-    track
-      ? Array.from(track.children)
-      : [];
-
-
-  if (
-    track &&
-    breadcrumbs &&
-    slides.length > 1
-  ) {
-
-    let currentIndex = 0;
-    let autoplayTimer = null;
-
-
-    const updatePosition = () => {
-
-      const slide =
-        slides[currentIndex];
-
-      if (!slide) return;
-
-
-      const offset =
-        slide.offsetLeft;
-
-
-      track.style.transition =
-        'transform 0.4s ease';
-
-
-      track.style.transform =
-        `translateX(-${offset}px)`;
-
-
-      breadcrumbs
-        .querySelectorAll(
-          '.breadcrumb'
-        )
-        .forEach((dot, index) => {
-
-          dot.classList.toggle(
-            'active',
-            index === currentIndex
-          );
-
-        });
-
-    };
-
-
-    const buildBreadcrumbs = () => {
-
-      breadcrumbs.innerHTML = '';
-
-
-      slides.forEach((_, index) => {
-
-        const dot =
-          document.createElement(
-            'button'
-          );
-
-
-        dot.className =
-          'breadcrumb';
-
-
-        dot.type = 'button';
-
-
-        dot.setAttribute(
-          'aria-label',
-          `Show testimonial ${index + 1}`
-        );
-
-
-        dot.addEventListener(
-          'click',
-          () => {
-
-            currentIndex = index;
-
-            updatePosition();
-
-            restartAutoplay();
-
-          }
-        );
-
-
-        breadcrumbs.appendChild(dot);
-
-      });
-
-
-      updatePosition();
-
-    };
-
-
-    const restartAutoplay = () => {
-
-      if (autoplayTimer) {
-
-        window.clearInterval(
-          autoplayTimer
-        );
-
-      }
-
-
-      autoplayTimer =
-        window.setInterval(
-          () => {
-
-            currentIndex =
-              (
-                currentIndex + 1
-              ) %
-              slides.length;
-
-
-            updatePosition();
-
-          },
-          5000
-        );
-
-    };
-
-
-    const viewport =
-      testimonialsSlideshow.querySelector(
-        '.slideshow-viewport'
-      );
-
-
-    let pointerStartX = 0;
-    let pointerStartY = 0;
-
-
-    const finishSwipe = (event) => {
-
-      if (
-        !viewport ||
-        event.pointerId !== undefined &&
-        !viewport.hasPointerCapture(
-          event.pointerId
-        )
-      ) {
-
-        return;
-
-      }
-
-
-      viewport.releasePointerCapture?.(
-        event.pointerId
-      );
-
-
-      const distanceX =
-        event.clientX -
-        pointerStartX;
-
-
-      const distanceY =
-        event.clientY -
-        pointerStartY;
-
-
-      const isHorizontalSwipe =
-        Math.abs(distanceX) > 40 &&
-        Math.abs(distanceX) >
-          Math.abs(distanceY);
-
-
-      if (isHorizontalSwipe) {
-
-        if (distanceX < 0) {
-
-          currentIndex =
-            (
-              currentIndex + 1
-            ) %
-            slides.length;
-
-        } else {
-
-          currentIndex =
-            (
-              currentIndex -
-              1 +
-              slides.length
-            ) %
-            slides.length;
-
-        }
-
-
-        updatePosition();
-
-        restartAutoplay();
-
-      }
-
-    };
-
-
-    viewport?.addEventListener(
-      'pointerdown',
-      (event) => {
-
-        if (
-          event.pointerType === 'mouse' &&
-          event.button !== 0
-        ) {
-          return;
-        }
-
-
-        pointerStartX =
-          event.clientX;
-
-        pointerStartY =
-          event.clientY;
-
-
-        viewport.setPointerCapture(
-          event.pointerId
-        );
-
-      }
-    );
-
-
-    viewport?.addEventListener(
-      'pointerup',
-      finishSwipe
-    );
-
-
-    viewport?.addEventListener(
-      'pointercancel',
-      finishSwipe
-    );
-
-
-    buildBreadcrumbs();
-
-    restartAutoplay();
-
-
-    window.addEventListener(
-      'resize',
-      updatePosition
-    );
-
-  }
+  pagePickUpInput?.addEventListener(
+    'input',
+    clearBookingPageDateErrorState
+  );
 
 }
 
 
-/* related service projects slideshow */
-
-document
-  .querySelectorAll(
-    '.related-projects-carousel'
-  )
-  .forEach((carousel) => {
-
-    const viewport =
-      carousel.querySelector(
-        '.slideshow-viewport'
-      );
-
-    const track =
-      carousel.querySelector(
-        '.slideshow-track'
-      );
-
-    const cards =
-      track
-        ? Array.from(track.children)
-        : [];
-
-
-    if (
-      !viewport ||
-      !track ||
-      cards.length < 2
-    ) {
-      return;
-    }
-
-
-    const mobileQuery =
-      window.matchMedia(
-        '(max-width: 600px)'
-      );
-
-
-    let currentIndex = 0;
-    let autoplayTimer = null;
-
-    let pointerStartX = 0;
-    let pointerStartY = 0;
-    let swipeMoved = false;
-
-
-    const updatePosition =
-      (withTransition = true) => {
-
-        if (!mobileQuery.matches) {
-
-          track.style.transition =
-            'none';
-
-          track.style.transform =
-            'none';
-
-          return;
-
-        }
-
-
-        const card =
-          cards[currentIndex];
-
-
-        if (!card) return;
-
-
-        track.style.transition =
-          withTransition
-            ? 'transform 0.4s ease'
-            : 'none';
-
-
-        track.style.transform =
-          `translateX(-${card.offsetLeft}px)`;
-
-      };
-
-
-    const stopAutoplay = () => {
-
-      window.clearInterval(
-        autoplayTimer
-      );
-
-      autoplayTimer = null;
-
-    };
-
-
-    const startAutoplay = () => {
-
-      stopAutoplay();
-
-
-      if (!mobileQuery.matches) {
-        return;
-      }
-
-
-      autoplayTimer =
-        window.setInterval(
-          () => {
-
-            currentIndex =
-              (
-                currentIndex + 1
-              ) %
-              cards.length;
-
-
-            updatePosition(true);
-
-          },
-          5000
-        );
-
-    };
-
-
-    const finishSwipe = (event) => {
-
-      if (
-        !viewport.hasPointerCapture(
-          event.pointerId
-        )
-      ) {
-        return;
-      }
-
-
-      viewport.releasePointerCapture?.(
-        event.pointerId
-      );
-
-
-      const distanceX =
-        event.clientX -
-        pointerStartX;
-
-
-      const distanceY =
-        event.clientY -
-        pointerStartY;
-
-
-      const isHorizontalSwipe =
-        mobileQuery.matches &&
-        Math.abs(distanceX) > 40 &&
-        Math.abs(distanceX) >
-          Math.abs(distanceY);
-
-
-      if (isHorizontalSwipe) {
-
-        currentIndex =
-          distanceX < 0
-            ? (
-                currentIndex + 1
-              ) %
-              cards.length
-            : (
-                currentIndex -
-                1 +
-                cards.length
-              ) %
-              cards.length;
-
-
-        updatePosition(true);
-
-        startAutoplay();
-
-        swipeMoved = true;
-
-      }
-
-    };
-
-
-    viewport.addEventListener(
-      'pointerdown',
-      (event) => {
-
-        if (
-          !mobileQuery.matches ||
-          (
-            event.pointerType === 'mouse' &&
-            event.button !== 0
-          )
-        ) {
-          return;
-        }
-
-
-        pointerStartX =
-          event.clientX;
-
-        pointerStartY =
-          event.clientY;
-
-        swipeMoved = false;
-
-
-        viewport.setPointerCapture(
-          event.pointerId
-        );
-
-      }
-    );
-
-
-    viewport.addEventListener(
-      'pointerup',
-      finishSwipe
-    );
-
-
-    viewport.addEventListener(
-      'pointercancel',
-      finishSwipe
-    );
-
-
-    viewport.addEventListener(
-      'click',
-      (event) => {
-
-        if (swipeMoved) {
-
-          event.preventDefault();
-
-          event.stopPropagation();
-
-          swipeMoved = false;
-
-        }
-
-      },
-      true
-    );
-
-
-    const syncMode = () => {
-
-      if (!mobileQuery.matches) {
-        stopAutoplay();
-      }
-
-      updatePosition(false);
-
-      startAutoplay();
-
-    };
-
-
-    mobileQuery.addEventListener?.(
-      'change',
-      syncMode
-    );
-
-
-    window.addEventListener(
-      'resize',
-      () => updatePosition(false)
-    );
-
-
-    syncMode();
-
-  });
 
 
 /* FAQ accordion */
