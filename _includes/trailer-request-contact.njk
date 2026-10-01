@@ -1,17 +1,19 @@
 <div class="contact-form-content">
   <div class="booking-form-heading">
     <p class="sub-title primary">Request a disposal bin</p>
-    <h2 id="booking-modal-title">Tell us where to reach you</h2>
+    <h2 id="booking-modal-title">Where can we reach you?</h2>
   </div>
 
-  <p class="booking-price">
-    <strong>$395 per dump</strong>
-  </p>
-  <p>
-    Our disposal bins are available for a flat $395 per dump.
-    Submit your preferred dates and project details and we'll confirm availability.
-  </p>
-  <br/>
+  <div class="booking-form-intro">
+    <p class="booking-price">
+      <strong>$395 per dump</strong>
+    </p>
+    <p>
+      Our disposal bins are available for a flat $395 per dump.
+      Submit your preferred dates and project details and we'll confirm availability.
+    </p>
+    <br/>
+  </div>
 
   <form
     name="trailer-request"
@@ -21,6 +23,7 @@
     class="contact-form booking-modal-form booking-page-form"
   >
     <input type="hidden" name="form-name" value="trailer-request" />
+    <p class="booking-form-alert" hidden role="alert" aria-live="polite"></p>
     <p class="hidden">
       <label>
         Don't fill this out if you're human:
