@@ -195,6 +195,71 @@ document.querySelectorAll('.faq-question-form').forEach(form => {
 });
 
 
+/* contact page form submission */
+
+document.querySelectorAll('#contact-form').forEach(form => {
+
+  const successMessage =
+    form.parentElement.querySelector(
+      '.contact-form-success'
+    );
+
+  if (!successMessage) return;
+
+  form.addEventListener('submit', async (event) => {
+
+    event.preventDefault();
+
+    if (!form.reportValidity()) return;
+
+    const submitButton =
+      form.querySelector('[type="submit"]');
+
+    if (submitButton) {
+      submitButton.disabled = true;
+      submitButton.textContent = 'Sending...';
+    }
+
+    try {
+
+      const formData = new FormData(form);
+
+      const response = await fetch('/', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/x-www-form-urlencoded',
+        },
+        body: new URLSearchParams(formData).toString(),
+      });
+
+      if (!response.ok) {
+        throw new Error(`Form submission failed: ${response.status}`);
+      }
+
+      form.classList.add('is-submitted');
+      successMessage.hidden = false;
+      successMessage.focus();
+
+    } catch (error) {
+
+      console.error('Contact form submission error:', error);
+
+      if (submitButton) {
+        submitButton.disabled = false;
+        submitButton.textContent = 'Send Message';
+      }
+
+      alert(
+        'There was a problem sending your message. Please try again.'
+      );
+
+    }
+
+  });
+
+});
+
+
 /* booking request modal */
 
 const bookingForm = document.querySelector('.booking-form');
