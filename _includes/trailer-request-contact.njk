@@ -61,10 +61,38 @@
 
     <textarea name="disposal-details" placeholder="What are you disposing of?*" rows="4" required></textarea>
 
-    <button type="submit" class="btn btn-secondary">Request a Disposal Bin</button>
+    <div class="marketing-consent micetype">
+      <p><strong>Optional marketing communications</strong></p>
 
+      <p>
+        Ridgeway Rentals Disposal Solutions<br />
+        {{ site.address.street }}<br />
+        {{ site.address.city }}, {{ site.address.province }} {{ site.address.postalCode }}<br />
+        <a href="tel:{{ site.phone }}" class="contact-link">{{ site.phone }}</a> · <a href="mailto:{{ site.email }}" class="contact-link">{{ site.email }}</a>
+      </p>
+
+      <label>
+        <input type="checkbox" name="email-marketing-consent" value="yes" />
+        <span>
+          I'd like to receive occasional emails from Ridgeway Rentals about promotions,
+          special offers, disposal services, and company updates. I can unsubscribe at any time.
+        </span>
+      </label>
+
+      <label>
+        <input type="checkbox" name="sms-marketing-consent" value="yes" />
+        <span>
+          I'd like to receive occasional text messages from Ridgeway Rentals about promotions,
+          special offers, disposal services, and company updates. I can unsubscribe at any time.
+        </span>
+      </label>
+    </div>
+    <br/>
+
+    <button type="submit" class="btn btn-secondary">Request a Disposal Bin</button>
+    <br/><br/>
     <p class="micetype">
-      Submitting this form is a request only. Your rental is not confirmed until a Ridgeway Rentals team member confirms availability.<br/><br/>
+      Submitting this form is a request only. Your rental is not confirmed until a Ridgeway Rentals team member confirms availability.<br/>
       We will be in touch soon to confirm your booking and collect payment details.
     </p>
   </form>

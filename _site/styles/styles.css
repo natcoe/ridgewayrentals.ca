@@ -1498,6 +1498,80 @@ span.flatpickr-weekday {
   min-height: 100px;
 }
 
+.marketing-consent {
+  margin-top: -4px;
+  display: grid;
+  gap: 10px;
+}
+
+.marketing-consent p {
+  margin: 0;
+  font-size: 0.78rem;
+  line-height: 1.5;
+}
+
+.marketing-consent label {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  align-items: start;
+  gap: 10px;
+  padding: 10px 12px;
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.04);
+  cursor: pointer;
+  transition: border-color 0.2s ease, background-color 0.2s ease;
+}
+
+.contact-form .marketing-consent input[type="checkbox"] {
+  width: 18px;
+  height: 18px;
+  min-width: 18px;
+  margin: 2px 0 0;
+  padding: 0;
+  border: 1px solid rgba(255, 255, 255, 0.35);
+  border-radius: 4px;
+  background: rgba(255, 255, 255, 0.08);
+  accent-color: var(--primary);
+  cursor: pointer;
+  flex: 0 0 auto;
+}
+
+.marketing-consent label:hover {
+  border-color: rgba(255, 255, 255, 0.28);
+  background: rgba(255, 255, 255, 0.07);
+}
+
+.marketing-consent span {
+  display: block;
+  font-size: 0.8rem;
+  line-height: 1.5;
+}
+
+.booking-modal-form .marketing-consent p,
+.booking-modal-form .marketing-consent span {
+  color: var(--secondary);
+}
+
+.booking-modal-form .marketing-consent label {
+  border-color: var(--border);
+  background: var(--surface-alt);
+}
+
+.booking-modal-form .marketing-consent label:hover {
+  border-color: rgba(252, 101, 0, 0.35);
+  background: #fff4ec;
+}
+
+.booking-modal-form .marketing-consent input[type="checkbox"] {
+  border-color: #c9d3e2;
+  background: var(--white);
+}
+
+.contact-form .marketing-consent + .btn-secondary {
+  margin-top: 10px;
+}
+
 /* NOTE: ".contact-form-content" doesn't match any other selector in this
    file (the form wrapper elsewhere is ".contact-form-container" /
    ".contact-form"). Verify the markup still uses this class name. */
@@ -1511,7 +1585,6 @@ span.flatpickr-weekday {
   color: rgba(255, 255, 255, 0.7);
   font-size: 0.85em;
   line-height: 1.5;
-  margin: 20px 0 0;
 }
 
 /* ---- Success state (shown after submit) ---- */
